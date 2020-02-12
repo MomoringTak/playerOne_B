@@ -33,17 +33,18 @@ router.get("/who/:name/:age", function(req, res, next) {
 router.get(`/book`, function(req, res, next) {
   let book = {};
 });
-router.get(`/book/${id}`, function(req, res, next) {
+router.get(`/book/:id`, function(req, res, next) {
   let bookDetail = {};
 });
 router.get(`/book/recentbook`, function(req, res, next) {
   let bookRecent = {};
 });
 
-router.get(`${userId}/booklist`, function(req, res, next) {
+router.get(`:id/booklist`, function(req, res, next) {
   let bookList = {};
 });
 
+//모모링님 여기 이놈입니다!!
 router.get(`${userId}/booklist/${booklistId}`, function(req, res, next) {
   let bookListDetail = {};
 });
@@ -52,23 +53,23 @@ router.get(`/shelf`, function(req, res, next) {
   let shelf = {};
 });
 
-router.get(`/${id}/shelf`, function(req, res, next) {
+router.get(`/:id/shelf`, function(req, res, next) {
   let userShelf = {};
 });
 
-router.get(`/${id}/profile`, function(req, res, next) {
+router.get(`/:id/profile`, function(req, res, next) {
   let object = {};
 });
 
-router.get(`/book/${id}/comment`, function(req, res, next) {
+router.get(`/book/:id/comment`, function(req, res, next) {
   let comment = {};
 });
 
-router.get(`/book/${id}/expression`, function(req, res, next) {
+router.get(`/book/:id/expression`, function(req, res, next) {
   let expression_Book = {};
 });
 
-router.get(`/booklist/${id}/expression`, function(req, res, next) {
+router.get(`/booklist/:id/expression`, function(req, res, next) {
   let expression_BookList = {};
 });
 
