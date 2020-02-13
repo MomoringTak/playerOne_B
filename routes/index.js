@@ -21,7 +21,7 @@ mongoose.connect("mongodb://localhost:27017/wtb", {
 });
 
 //모모링님.
-//콜렉션에따라 이렇게..Book.
+//콜렉션에따라 이렇게..Book.Find
 router.get("/book", function(req, res) {
   Book.find(function(err, foundArticle) {
     console.log(foundArticle);
@@ -71,8 +71,7 @@ router.get(`:id/booklist`, function(req, res, next) {
   let bookList = {};
 });
 
-//모모링님 여기 이놈입니다!!
-router.get(`${userId}/booklist/${booklistId}`, function(req, res, next) {
+router.get(`:id/booklist/:booklistid`, function(req, res, next) {
   let bookListDetail = {};
 });
 
