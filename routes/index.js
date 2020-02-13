@@ -2,18 +2,18 @@ var express = require("express");
 var router = express.Router();
 const mongoose = require("mongoose");
 
-import Author from "./models/Author";
-import Book from "./models/Book";
-import BookList from "./models/BookList";
-import Comment from "./models/Comment";
-import Expression from "./models/Expression";
-import Genre from "./models/Genre";
-import Image from "./models/Image";
-import Name from "./models/Name";
-import Profile from "./models/Profile";
-import Review from "./models/Review";
-import Shelf from "./models/Shelf";
-import User from "./models/User";
+import Author from "../models/Author";
+import Book from "../models/Book";
+import BookList from "../models/BookList";
+import Comment from "../models/Comment";
+import Expression from "../models/Expression";
+import Genre from "../models/Genre";
+import Image from "../models/Image";
+import Name from "../models/Name";
+import Profile from "../models/Profile";
+import Review from "../models/Review";
+import Shelf from "../models/Shelf";
+import User from "../models/User";
 
 mongoose.connect("mongodb://localhost:27017/wtb", {
   useNewUrlParser: true,
