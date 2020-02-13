@@ -1,6 +1,10 @@
+//Review
+
 const mongoose = require("mongoose");
 
-const ReviewSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const ReviewSchema = new Schema({
   expression: {
     emotion_expression: []
   },

@@ -1,12 +1,12 @@
+//BookList
+
 const mongoose = require("mongoose");
 
-const BookListSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const BookListSchema = new Schema({
   booklist_title: {
     type: String,
-    required: true
-  },
-  book: {
-    type: Book,
     required: true
   },
   createdAt: {

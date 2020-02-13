@@ -1,13 +1,16 @@
+//Author
 const mongoose = require("mongoose");
 
-const AuthorSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const AuthorSchema = new Schema({
   profile: {
     name: {
       firstName: {
         type: String,
         required: true
       },
-      LastName: {
+      lastName: {
         type: String,
         required: true
       }

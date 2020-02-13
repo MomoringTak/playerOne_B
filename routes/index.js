@@ -3,23 +3,21 @@ var express = require("express");
 var router = express.Router();
 var db = require("../db/db");
 
-// import Author from "../models/Author";
-// import Book from "../models/Book";
-// import BookList from "../models/BookList";
-// import Comment from "../models/Comment";
-// import Expression from "../models/Expression";
-// import Genre from "../models/Genre";
-// import Image from "../models/Image";
-// import Name from "../models/Name";
-// import Profile from "../models/Profile";
-// import Review from "../models/Review";
-// import Shelf from "../models/Shelf";
-// import User from "../models/User";
 var Book = require("../models/Book");
 
+var Author = require("../models/Author");
+var BookList = require("../models/BookList");
+var Comment = require("../models/Comment");
+var Expression = require("../models/Expression");
+var Genre = require("../models/Genre");
+var Image = require("../models/Image");
+var Name = require("../models/Name");
+var Profile = require("../models/Profile");
+var Review = require("../models/Review");
+var Review = require("../models/Review");
+var Shelf = require("../models/Shelf");
+var User = require("../models/User");
 
-//모모링님.
-//콜렉션에따라 이렇게..Book.Find
 router.get("/book", function(req, res) {
   Book.Book.find(function(err, foundArticle) {
     console.log(foundArticle);

@@ -1,6 +1,10 @@
+//Comment
+
 const mongoose = require("mongoose");
 
-const CommentSchema = new mongoose.Schema({});
+const Schema = mongoose.Schema;
+
+const CommentSchema = new Schema({});
 
 const Comment = mongoose.model("Comment", CommentSchema);
 

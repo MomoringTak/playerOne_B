@@ -1,15 +1,14 @@
+//Shelf
+
 const mongoose = require("mongoose");
 
-const ShelfSchema = new mongoose.Schema({
-  booklist: [
-    {
-      type: BookList,
-      required: true
-    }
-  ],
-  host: {
+const Schema = mongoose.Schema;
+
+const ShelfSchema = new Schema({
+  User: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "User"
   }
 });
 

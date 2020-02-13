@@ -1,45 +1,47 @@
+//Book
+
 const mongoose = require("mongoose");
 
-const BookSchema = new mongoose.Schema({
-  id: {
+const Schema = mongoose.Schema;
+
+const BookSchema = new Schema({
+  released_date: {
+    type: Date,
+    required: true
+  },
+  book_title: {
     type: String,
     required: true
   },
-  profile: {
-    name: {
-      firstName: {
-        type: String,
-        required: true
-      },
-      LastName: {
-        type: String,
-        required: true
-      }
+  description: {
+    type: String,
+    required: true
+  },
+  keyword: {
+    type: String,
+    required: true
+  },
+  image: {
+    url: {
+      type: String,
+      required: true
     },
-    image: {
-      url: {
-        type: String,
-        required: true
-      },
-      caption: {
-        type: String,
-        required: true
-      }
-    },
-    email: {
+    caption: {
       type: String,
       required: true
     }
   },
-  password: {
-    type: String,
-    required: true
+  genre: {
+    category: []
   },
-  nickname: {
-    type: String
+  BookList: {
+    type: Schema.Types.ObjectId,
+    ref: "BookList"
   },
-  quote: {
-    type: String
+  Author: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Author"
   },
   createdAt: {
     type: Date,
