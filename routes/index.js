@@ -17,6 +17,7 @@ var Review = require("../models/Review");
 var Review = require("../models/Review");
 var Shelf = require("../models/Shelf");
 var User = require("../models/User");
+var Test = require("../models/Test");
 
 router.get("/book", function(req, res) {
   Book.Book.find(function(err, foundArticle) {
@@ -24,18 +25,20 @@ router.get("/book", function(req, res) {
   });
 });
 
-router.post("/book", function(req, res) {
-  const newBook = Book({
-    id: req.body.isbn,
-    profile: {
-      firstName: req.body.firstname,
-      lastName: req.body.lastname
-    }
+router.post("/test/content", function(req, res) {
+  var tag = (req.body.tag).split(",");
+
+  const newTest = Test.Test({
+    content: {
+      title: req.body.title,
+      description: req.body.description
+    },
+    tag: tag
   });
 
-  newBook.save(function(err) {
+  newTest.save(function(err) {
     if (!err)
-      res.json({ success: true, msg: "Successfully added a new book!" });
+      res.json({ success: true, msg: "Successfully added a new test!" });
     else res.json({ success: false, msg: err });
   });
 });
