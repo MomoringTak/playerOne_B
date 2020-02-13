@@ -24,6 +24,22 @@ router.get("/book", function(req, res) {
   });
 });
 
+router.post("/book", function(req, res) {
+  const newBook = Book({
+    id: req.body.isbn,
+    profile: {
+      firstName: req.body.firstname,
+      lastName: req.body.lastname
+    }
+  });
+
+  newBook.save(function(err) {
+    if (!err)
+      res.json({ success: true, msg: "Successfully added a new book!" });
+    else res.json({ success: false, msg: err });
+  });
+});
+
 /// Method: Get, Route '/'
 router.get("/", function(req, res, next) {
   res.status(200).send("index page");
