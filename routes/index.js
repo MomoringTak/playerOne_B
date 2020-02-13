@@ -15,7 +15,7 @@ var db = require("../db/db");
 // import Review from "../models/Review";
 // import Shelf from "../models/Shelf";
 // import User from "../models/User";
-var Book = require("../models/Book");
+var Book = require("../models/Book").Book;
 
 
 //모모링님.
@@ -25,6 +25,71 @@ router.get("/book", function(req, res) {
     console.log(foundArticle);
   });
 });
+
+
+// id: {
+//   type: String,
+//   required: true
+// },
+// profile: {
+//   name: {
+//     firstName: {
+//       type: String,
+//       required: true
+//     },
+//     LastName: {
+//       type: String,
+//       required: true
+//     }
+//   },
+//   image: {
+//     url: {
+//       type: String,
+//       required: true
+//     },
+//     caption: {
+//       type: String,
+//       required: true
+//     }
+//   },
+//   email: {
+//     type: String,
+//     required: true
+//   }
+// },
+// password: {
+//   type: String,
+//   required: true
+// },
+// nickname: {
+//   type: String
+// },
+// quote: {
+//   type: String
+// },
+// createdAt: {
+//   type: Date,
+//   required: true
+// },
+// updatedAt: {
+//   type: Date,
+//   required: true
+// }
+
+router.post("/book", function(req, res){
+  const newBook = Book({
+    id: req.body.isbn,
+    profile: {
+      firstName: req.body.firstname,
+      lastName: req.body.lastname,
+    }
+  });
+
+  newBook.save(function(err){
+    if(!err) res.json({ success: true, msg: "Successfully added a new book!"});
+    else res.json({success:false, msg: err});
+  })
+})
 
 /// Method: Get, Route '/'
 router.get("/", function(req, res, next) {
