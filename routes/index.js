@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 var express = require("express");
 var router = express.Router();
 var db = require("../db/db");
+var findOrCreate = require("mongoose-findorcreate");
 
 var Book = require("../models/Book");
 
@@ -26,7 +27,7 @@ router.get("/book", function(req, res) {
 });
 
 router.post("/test/content", function(req, res) {
-  var tag = (req.body.tag).split(",");
+  var tag = req.body.tag.split(",");
 
   const newTest = Test.Test({
     content: {
@@ -40,6 +41,19 @@ router.post("/test/content", function(req, res) {
     if (!err)
       res.json({ success: true, msg: "Successfully added a new test!" });
     else res.json({ success: false, msg: err });
+  });
+});
+
+router.post("/users", function(req, res) {
+  User.User.findOrCreate({ googleId: req.body.googleId }, function(
+    err,
+    click,
+    created
+  ) {
+    console.log(`click was made ${click.googleId}`);
+    User.User.findOrCreate({}, function(err, click, created) {
+      console.log(`Did not create a new click yay ${click.googleId}`);
+    });
   });
 });
 
