@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   googleId: String,
-  firstName: String,
-  lastName: String
+  email: String,
+  nickname: String
 });
 
 UserSchema.plugin(findOrCreate);

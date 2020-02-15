@@ -2,7 +2,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import db from "../db/db";
-import findOrCreate from "mongoose-findorcreate";
 
 import Book from "../models/Book";
 import Author from "../models/Author";
@@ -17,41 +16,63 @@ import Test from "../models/Test";
 
 const router = express.Router();
 
-router.get("/book", function(req, res) {
-  Book.Book.find(function(err, foundArticle) {
+// router.get("/book", function(req, res) {
+//   Book.Book.find(function(err, foundArticle) {
+//     console.log(foundArticle);
+//   });
+// });
+
+// router.post("/test/content", function(req, res) {
+//   var tag = req.body.tag.split(",");
+
+//   const newTest = Test.Test({
+//     content: {
+//       title: req.body.title,
+//       description: req.body.description
+//     },
+//     tag: tag
+//   });
+
+//   newTest.save(function(err) {
+//     if (!err)
+//       res.json({ success: true, msg: "Successfully added a new test!" });
+//     else res.json({ success: false, msg: err });
+//   });
+// });
+
+router.get("/test", function(req, res) {
+  User.find(function(err, foundArticle) {
     console.log(foundArticle);
+    res.json(foundArticle);
   });
 });
 
-router.post("/test/content", function(req, res) {
-  var tag = req.body.tag.split(",");
-
-  const newTest = Test.Test({
-    content: {
-      title: req.body.title,
-      description: req.body.description
-    },
-    tag: tag
-  });
-
-  newTest.save(function(err) {
-    if (!err)
-      res.json({ success: true, msg: "Successfully added a new test!" });
-    else res.json({ success: false, msg: err });
+router.get("/users/:googleId", function(req, res) {
+  const googleId = req.param.googleId;
+  // const {
+  //   params: { googleId: googleId }
+  // } = req;
+  User.findOne({ googleId: googleId }, function(err, user) {
+    if (user) {
+      res.json(user);
+    } else {
+      res.json(`${googleId}`);
+    }
   });
 });
 
-router.post("/users", function(req, res) {
-  User.User.findOrCreate({ googleId: req.body.googleId }, function(
-    err,
-    click,
-    created
-  ) {
-    console.log(`click was made ${click.googleId}`);
-    User.User.findOrCreate({}, function(err, click, created) {
-      console.log(`Did not create a new click yay ${click.googleId}`);
-    });
-  });
+router.post("/users", function(req, res, next) {
+  User.findOrCreate(
+    { googleId: req.body.googleId },
+    { nickname: req.body.name, email: req.body.email },
+    function(err, click, created) {
+      console.log(`click was made ${click.googleId}`);
+
+      User.findOrCreate({}, function(err, click, created) {
+        console.log(`Did not create a new click  ${click.googleId}`);
+      });
+    }
+  );
 });
 
 /// Method: Get, Route '/'
