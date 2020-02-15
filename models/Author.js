@@ -1,5 +1,5 @@
 //Author
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -39,4 +39,4 @@ const AuthorSchema = new Schema({
 
 const Author = mongoose.model("Author", AuthorSchema);
 
-module.exports = { Author, AuthorSchema };
+export default Author;

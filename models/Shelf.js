@@ -1,6 +1,6 @@
 //Shelf
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -14,4 +14,4 @@ const ShelfSchema = new Schema({
 
 const Shelf = mongoose.model("Shelf", ShelfSchema);
 
-module.exports = { Shelf, ShelfSchema };
+export default Shelf;

@@ -1,5 +1,5 @@
 //Test
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -19,4 +19,4 @@ const TestSchema = new Schema({
 
 const Test = mongoose.model("Test", TestSchema);
 
-module.exports = { Test, TestSchema };
+export default Test;

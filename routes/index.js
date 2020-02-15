@@ -1,24 +1,21 @@
-const mongoose = require("mongoose");
-var express = require("express");
-var router = express.Router();
-var db = require("../db/db");
-var findOrCreate = require("mongoose-findorcreate");
+//Dependencies
+import express from "express";
+import mongoose from "mongoose";
+import db from "../db/db";
+import findOrCreate from "mongoose-findorcreate";
 
-var Book = require("../models/Book");
+import Book from "../models/Book";
+import Author from "../models/Author";
+import Booklist from "../models/Booklist";
+import Comment from "../models/Comment";
+import Expression from "../models/Expression";
+import Genre from "../models/Genre";
+import Review from "../models/Review";
+import Shelf from "../models/Shelf";
+import User from "../models/User";
+import Test from "../models/Test";
 
-var Author = require("../models/Author");
-var BookList = require("../models/BookList");
-var Comment = require("../models/Comment");
-var Expression = require("../models/Expression");
-var Genre = require("../models/Genre");
-var Image = require("../models/Image");
-var Name = require("../models/Name");
-var Profile = require("../models/Profile");
-var Review = require("../models/Review");
-var Review = require("../models/Review");
-var Shelf = require("../models/Shelf");
-var User = require("../models/User");
-var Test = require("../models/Test");
+const router = express.Router();
 
 router.get("/book", function(req, res) {
   Book.Book.find(function(err, foundArticle) {
@@ -86,50 +83,50 @@ router.get("/who/:name/:age", function(req, res, next) {
   res.status(200).send(user);
 });
 
-router.get(`/book`, function(req, res, next) {
-  let book = {};
-});
-router.get(`/book/:id`, function(req, res, next) {
-  let bookDetail = {};
-});
-router.get(`/book/recentbook`, function(req, res, next) {
-  let bookRecent = {};
-});
+// router.get(`/book`, function(req, res, next) {
+//   let book = {};
+// });
+// router.get(`/book/:id`, function(req, res, next) {
+//   let bookDetail = {};
+// });
+// router.get(`/book/recentbook`, function(req, res, next) {
+//   let bookRecent = {};
+// });
 
-router.get(`:id/booklist`, function(req, res, next) {
-  let bookList = {};
-});
+// router.get(`:id/booklist`, function(req, res, next) {
+//   let bookList = {};
+// });
 
-router.get(`:id/booklist/:booklistid`, function(req, res, next) {
-  let bookListDetail = {};
-});
+// router.get(`:id/booklist/:booklistid`, function(req, res, next) {
+//   let bookListDetail = {};
+// });
 
-router.get(`/shelf`, function(req, res, next) {
-  let shelf = {};
-});
+// router.get(`/shelf`, function(req, res, next) {
+//   let shelf = {};
+// });
 
-router.get(`/:id/shelf`, function(req, res, next) {
-  let userShelf = {};
-});
+// router.get(`/:id/shelf`, function(req, res, next) {
+//   let userShelf = {};
+// });
 
-router.get(`/:id/profile`, function(req, res, next) {
-  let object = {};
-});
+// router.get(`/:id/profile`, function(req, res, next) {
+//   let object = {};
+// });
 
-router.get(`/book/:id/comment`, function(req, res, next) {
-  let comment = {};
-});
+// router.get(`/book/:id/comment`, function(req, res, next) {
+//   let comment = {};
+// });
 
-router.get(`/book/:id/expression`, function(req, res, next) {
-  let expression_Book = {};
-});
+// router.get(`/book/:id/expression`, function(req, res, next) {
+//   let expression_Book = {};
+// });
 
-router.get(`/booklist/:id/expression`, function(req, res, next) {
-  let expression_BookList = {};
-});
+// router.get(`/booklist/:id/expression`, function(req, res, next) {
+//   let expression_BookList = {};
+// });
 
 // router.get(``, function (req, res, next) {
 //     let object = {}
 // })
 
-module.exports = router;
+export default router;

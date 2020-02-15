@@ -1,17 +1,19 @@
-const mongoose = require("mongoose");
-var findOrCreate = require("mongoose-findorcreate");
+import mongoose from "mongoose";
+import findOrCreate from "mongoose-findorcreate";
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  googleId: String
+  googleId: String,
+  firstName: String,
+  lastName: String
 });
 
 UserSchema.plugin(findOrCreate);
 
 const User = mongoose.model("User", UserSchema);
 
-module.exports = { User, UserSchema };
+export default User;
 
 // //User
 
