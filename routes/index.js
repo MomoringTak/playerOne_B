@@ -60,6 +60,21 @@ router.get("/userInfo/:googleId", function(req, res) {
   });
 });
 
+router.patch("/updateUser/:googleId", function(req, res) {
+  const googleId = req.params.googleId;
+  User.updateOne(
+    { googleId: googleId },
+    { nickname: req.body.nickname },
+    function(err) {
+      if (!err) {
+        res.json("Successfully updated selected name.");
+      } else {
+        res.json(err);
+      }
+    }
+  );
+});
+
 router.post("/users", function(req, res, next) {
   User.findOrCreate(
     { googleId: req.body.googleId },
