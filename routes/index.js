@@ -47,16 +47,15 @@ router.get("/test", function(req, res) {
   });
 });
 
-router.get("/users/:googleId", function(req, res) {
-  const googleId = req.param.googleId;
-  // const {
-  //   params: { googleId: googleId }
-  // } = req;
+router.get("/userInfo/:googleId", function(req, res) {
+  const {
+    params: { googleId: googleId }
+  } = req;
   User.findOne({ googleId: googleId }, function(err, user) {
     if (user) {
       res.json(user);
     } else {
-      res.json(`${googleId}`);
+      res.json(`The Error : ${googleId}`);
     }
   });
 });
