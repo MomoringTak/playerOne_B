@@ -25,34 +25,6 @@ router.get("/", function(req, res, next) {
   res.json(`index page`);
 });
 
-<<<<<<< HEAD
-=======
-//주소가 요상한데.... params 만 넘기고 싶은데... /book 이렇게해서... ㅠㅠㅠㅠㅠ
-//:title/:display 붙이지 않으면 왜 안받아지는지 ㅠㅠㅠㅠㅠㅠ 연구를 좀 더 해보겠습니다.
-/// Method: Get, Route '/book/:title/:display' Example '/book/정약용/5'
-router.get("/book/:title/:display", function(req, res) {
-  const {
-    params: { title: title, display: display }
-  } = req;
-
-  const getBook = (title, display) =>
-    api.get("", { params: { d_titl: title, display: display } });
-
-  async function showBook(title, display) {
-    try {
-      const { data } = await getBook(title, display);
-      console.log(data.items);
-      res.status(200).json(data.items);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      console.log("done");
-    }
-  }
-  showBook(title, display);
-});
-
->>>>>>> 9b7106187e0a53e461f9453b06340f84bbabbbb3
 /// Method: Get, Route '/userInfo/:googleId' Example '/userInfo/googleId'
 router.get("/user/:googleId", function(req, res) {
   const {
