@@ -56,31 +56,34 @@ router.get("/book/:title/:display", function(req, res) {
       console.log("done");
     }
   }
-
   showBook(title, display);
 });
 
 /// Method: Get, Route '/userInfo/:googleId' Example '/userInfo/googleId'
-router.get("/userInfo/:googleId", function(req, res) {
+router.get("/user/:googleId", function(req, res) {
   const {
     params: { googleId: googleId }
   } = req;
   User.findOne({ googleId: googleId }, function(err, user) {
     if (user) {
-      res.json(user);
+      res.status(200).json({ user: user, success: true, msg: "Success" });
     } else {
-      res.json(`The Error : ${googleId}`);
+      res.status(400).json({ success: false, msg: err });
     }
   });
 });
 
 /// Method: Post, Route '/users' Example '/users'
-router.post("/users", function(req, res, next) {
+router.post("/user", function(req, res) {
   User.findOrCreate(
     { googleId: req.body.googleId },
     { nickname: req.body.name, email: req.body.email },
     function(err, click, created) {
-      console.log(`click was made ${click.googleId}`);
+      if (!err) {
+        res.status(200).json({ success: true, msg: "Success" });
+      } else {
+        res.status(400).json({ success: false, msg: err });
+      }
 
       User.findOrCreate({}, function(err, click, created) {
         console.log(`Did not create a new click  ${click.googleId}`);
@@ -90,16 +93,16 @@ router.post("/users", function(req, res, next) {
 });
 
 /// Method: Post, Route '/updateUser/:googleId' Example '/updateUser/googleId'
-router.patch("/updateUser/:googleId", function(req, res) {
+router.patch("/user/:googleId", function(req, res) {
   const googleId = req.params.googleId;
   User.updateOne(
     { googleId: googleId },
     { nickname: req.body.nickname },
     function(err) {
       if (!err) {
-        res.json("Successfully updated selected name.");
+        res.status(200).json("Successfully updated selected name.");
       } else {
-        res.json(err);
+        res.status(400).json({ success: false, msg: err });
       }
     }
   );
@@ -161,51 +164,5 @@ router.get("/test", function(req, res) {
   });
 });
 */
-
-// router.get(`/book`, function(req, res, next) {
-//   let book = {};
-// });
-// router.get(`/book/:id`, function(req, res, next) {
-//   let bookDetail = {};
-// });
-// router.get(`/book/recentbook`, function(req, res, next) {
-//   let bookRecent = {};
-// });
-
-// router.get(`:id/booklist`, function(req, res, next) {
-//   let bookList = {};
-// });
-
-// router.get(`:id/booklist/:booklistid`, function(req, res, next) {
-//   let bookListDetail = {};
-// });
-
-// router.get(`/shelf`, function(req, res, next) {
-//   let shelf = {};
-// });
-
-// router.get(`/:id/shelf`, function(req, res, next) {
-//   let userShelf = {};
-// });
-
-// router.get(`/:id/profile`, function(req, res, next) {
-//   let object = {};
-// });
-
-// router.get(`/book/:id/comment`, function(req, res, next) {
-//   let comment = {};
-// });
-
-// router.get(`/book/:id/expression`, function(req, res, next) {
-//   let expression_Book = {};
-// });
-
-// router.get(`/booklist/:id/expression`, function(req, res, next) {
-//   let expression_BookList = {};
-// });
-
-// router.get(``, function (req, res, next) {
-//     let object = {}
-// })
 
 export default router;
