@@ -15,11 +15,3 @@
 5. BookList
 6. Comment
 7. Review
-
-##### Nested Type Schema(Document)
-
-1. Profile
-2. Name
-3. Image
-4. Expression
-5. Genre
