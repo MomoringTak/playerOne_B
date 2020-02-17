@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes/index";
+import book from "./routes/book";
 import logger from "morgan";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true })); //false ==> true
 app.use(cookieParser());
 
 app.use("/", router);
+app.use("/book", book);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
