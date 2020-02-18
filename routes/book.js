@@ -55,7 +55,7 @@ router.post("/", function (req, res) {
         return item;
     });
 
-    Book.collection.insertMany(books, { ordered: false }, function (err, book) {
+    Book.collection.insertMany(books, { ordered: false }, function (err, result) {
         if (err) {
             res.status(400).send({success:false, msg: err});
         } else {
@@ -63,7 +63,7 @@ router.post("/", function (req, res) {
                 if(err) res.status(400).send(err);
                 console.log(doc);
             })
-            res.status(200).send({ success:true, msg:"성공!!", books: book });
+            res.status(200).send({ success:true, msg:"성공!!", result: result });
         }
     });
 });
