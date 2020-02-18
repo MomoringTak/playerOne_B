@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 import db from "../db/db";
 
-import Book from "../models/Book";
+
 import Author from "../models/Author";
 import Booklist from "../models/Booklist";
 import Comment from "../models/Comment";
