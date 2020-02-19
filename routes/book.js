@@ -45,17 +45,15 @@ router.post("/", function(req, res) {
     return item;
   });
 
-  Book.collection.insertMany(books, { ordered: false }, function(err, book) {
+  Book.collection.insertMany(books, { ordered: false }, function(err, result) {
     if (err) {
-      //정보들을 다 수집 예시: 중복되는 타이틀, 이미 존재하는데이터로 인해 저장에 성공하지 못한 데이터, 및 성공한 데이터 표시
       res.status(400).send({ success: false, msg: err });
     } else {
       Book.find({ createdAt: dt }, function(err, doc) {
         if (err) res.status(400).send(err);
-        //이게 doc을 보내면 됨.
         console.log(doc);
       });
-      res.status(200).send({ success: true, msg: "성공!!", books: book });
+      res.status(200).send({ success: true, msg: "성공!!", result: result });
     }
   });
 });
