@@ -30,11 +30,11 @@ router.get("/:title/:display", function(req, res) {
       }
     });
 
-  async function showBook(title, display) {
+  const showBook = async (title, display) => {
     const { data } = await getBook(title, display);
     console.log(data.items);
     res.status(200).json(data.items);
-  }
+  };
 
   showBook(title, display);
 });
@@ -59,7 +59,7 @@ router.get("/:id", function(req, res) {
   } = req;
   Book.findOne({ isbn: id }, function(err, book) {
     if (book) {
-      res.status(200).json({ book: book, success: true, msg: "Sucess" });
+      res.status(200).json({ book: book, success: true, msg: "fkkk" });
     } else {
       res.status(400).json({ sucess: false, msg: err });
     }

@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes/index";
 import book from "./routes/book";
+import booklist from "./routes/booklist";
 import logger from "morgan";
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use("/", router);
 app.use("/book", book);
+app.use("/booklist", booklist);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
