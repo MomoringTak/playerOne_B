@@ -1,6 +1,7 @@
 //Dependencies
 import express from "express";
 import db from "../db/db";
+import mongoose from "mongoose";
 
 import BookList from "../models/BookList";
 import Book from "../models/Book";
@@ -32,14 +33,30 @@ const router = express.Router();
 // };
 
 //booklist 생성 API : 제목과 선택된 책들로 구성된 Booklist 추가.
-router.post(`/`, function(req, res) {
-  //오는 데이터형식
-  /*
-    {
-      title : (타이틀 값),
-      items : (선택된 book_id 값들)
+router.post(`/`, function (req, res) {
+
+  const dt = new Date();
+  let newBookList = req.body;
+  newBookList.createdAt = dt;
+  newBookList.updatedAt = dt;
+
+  BookList.create(
+    newBookList,
+    function(err, result) {
+      if (!err) {
+        let booksIds = result.books;
+        booksIds = booksIds.map(item => { item = mongoose.Types.ObjectId(item); return item; });
+        Book.updateMany({ '_id': { $in: booksIds } }, { $push: { booklists: result._id } },
+          function (err, success) {
+            if (err) res.status(400).json({ success: false, msg: err, id: result._id });
+            else res.status(200).json({ success: true,  msg: "Success", bookList: result, result: success });
+          })
+        }
+        else {
+        res.status(400).json({ success: false, msg: err });
+      }
     }
-  */
+  );
 });
 
 // AddBookItem In BookList

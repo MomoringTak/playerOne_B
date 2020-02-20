@@ -14,10 +14,10 @@ const BookListSchema = new Schema({
   updatedAt: {
     type: Date
   },
-  books: {
+  books: [{
     type: Schema.Types.ObjectId,
     ref: "Book"
-  },
+  }],
   shelf: {
     type: Schema.Types.ObjectId,
     ref: "Shelf"

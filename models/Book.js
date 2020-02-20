@@ -52,10 +52,10 @@ const BookSchema = new Schema({
   genre: {
     category: []
   },
-  booklists: {
+  booklists: [{
     type: Schema.Types.ObjectId,
     ref: "BookList"
-  },
+  }],
   createdAt: {
     type: Date,
     required: true
