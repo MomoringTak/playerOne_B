@@ -7,22 +7,6 @@ import Book from "../models/Book";
 
 const router = express.Router();
 
-// const addBooktoBooklist = function(booklistId, bookId) {
-//   return BookList.findByIdAndUpdate(
-//     booklistId,
-//     { $push: { books: bookId } },
-//     { new: true, useFindAndModify: false }
-//   );
-// };
-
-// const addBooklisttoBook = function(bookId, booklistId) {
-//   return Book.findByIdAndUpdate(
-//     bookId,
-//     { $push: { booklists: booklistId } },
-//     { new: true, useFindAndModify: false }
-//   );
-// };
-
 // const getBooklistWithPopulate = id => {
 //   return BookList.findById(id).populate("books");
 // };
@@ -31,15 +15,33 @@ const router = express.Router();
 //   return Book.findById(id).populate("booklist");
 // };
 
+const createBookList = function(booklist) {
+  return BookList.create(booklist).then(doc => doc);
+};
+
+const addBooktoBooklist = function(booklistId, bookId) {
+  return BookList.findByIdAndUpdate(
+    booklistId,
+    { $push: { books: bookId } },
+    { new: true, useFindAndModify: false }
+  );
+};
+
+const addBooklisttoBook = function(bookId, booklistId) {
+  return Book.findByIdAndUpdate(
+    bookId,
+    { $push: { booklists: booklistId } },
+    { new: true, useFindAndModify: false }
+  );
+};
 //booklist 생성 API : 제목과 선택된 책들로 구성된 Booklist 추가.
-router.post(`/`, function(req, res) {
-  //오는 데이터형식
-  /*
-    {
-      title : (타이틀 값),
-      items : (선택된 book_id 값들)
-    }
-  */
+router.post(`/`, async function(req, res) {
+  const BL = await createBookList({ title: req.body.title });
+
+  for (let bookid of req.body.items) {
+    await addBooktoBooklist(BL._id, bookid);
+    await addBooklisttoBook(bookid, BL._id);
+  }
 });
 
 // AddBookItem In BookList
