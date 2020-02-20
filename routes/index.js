@@ -4,19 +4,16 @@ import mongoose from "mongoose";
 
 import db from "../db/db";
 
-
-import Author from "../models/Author";
-import Booklist from "../models/Booklist";
-import Comment from "../models/Comment";
-import Expression from "../models/Expression";
-import Genre from "../models/Genre";
-import Review from "../models/Review";
-import Shelf from "../models/Shelf";
+// import Author from "../models/Author";
+// import Comment from "../models/Comment";
+// import Expression from "../models/Expression";
+// import Genre from "../models/Genre";
+// import Review from "../models/Review";
+// import Shelf from "../models/Shelf";
 import User from "../models/User";
 import Test from "../models/Test";
 
 const router = express.Router();
-
 
 /// Method: Get, Route '/'
 router.get("/", function(req, res, next) {

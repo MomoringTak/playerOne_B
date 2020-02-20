@@ -1,5 +1,5 @@
 //Book
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 import findOrCreate from "mongoose-findorcreate";
 
 const Schema = mongoose.Schema;
@@ -40,7 +40,7 @@ const BookSchema = new Schema({
   isbn: {
     type: String,
     required: true,
-    unique : true
+    unique: true
   },
   description: {
     type: String,
@@ -52,7 +52,7 @@ const BookSchema = new Schema({
   genre: {
     category: []
   },
-  BookList: {
+  booklists: {
     type: Schema.Types.ObjectId,
     ref: "BookList"
   },

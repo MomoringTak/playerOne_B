@@ -1,29 +1,29 @@
 //BookList
-
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 const BookListSchema = new Schema({
-  booklist_title: {
+  title: {
     type: String,
     required: true
   },
   createdAt: {
-    type: Date,
-    required: true
+    type: Date
   },
   updatedAt: {
-    type: Date,
-    required: true
+    type: Date
   },
-  Shelf: {
+  books: {
     type: Schema.Types.ObjectId,
-    required: true,
+    ref: "Book"
+  },
+  shelf: {
+    type: Schema.Types.ObjectId,
     ref: "Shelf"
   }
 });
 
 const BookList = mongoose.model("BookList", BookListSchema);
 
-module.exports = { BookList, BookListSchema };
+export default BookList;

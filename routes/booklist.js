@@ -1,19 +1,45 @@
 //Dependencies
 import express from "express";
-import axios from "axios";
-import Book from "../models/Book";
 import db from "../db/db";
+
+import BookList from "../models/BookList";
+import Book from "../models/Book";
 
 const router = express.Router();
 
+// const addBooktoBooklist = function(booklistId, bookId) {
+//   return BookList.findByIdAndUpdate(
+//     booklistId,
+//     { $push: { books: bookId } },
+//     { new: true, useFindAndModify: false }
+//   );
+// };
+
+// const addBooklisttoBook = function(bookId, booklistId) {
+//   return Book.findByIdAndUpdate(
+//     bookId,
+//     { $push: { booklists: booklistId } },
+//     { new: true, useFindAndModify: false }
+//   );
+// };
+
+// const getBooklistWithPopulate = id => {
+//   return BookList.findById(id).populate("books");
+// };
+
+// const getBookWithPouplate = id => {
+//   return Book.findById(id).populate("booklist");
+// };
+
 //booklist 생성 API : 제목과 선택된 책들로 구성된 Booklist 추가.
 router.post(`/`, function(req, res) {
-  const dt = new Date();
-  const bookList = req.body.map(item => {
-    item.createdAt = dt;
-    item.updatedAt = dt;
-    return item;
-  });
+  //오는 데이터형식
+  /*
+    {
+      title : (타이틀 값),
+      items : (선택된 book_id 값들)
+    }
+  */
 });
 
 // AddBookItem In BookList
