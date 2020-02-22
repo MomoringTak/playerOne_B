@@ -9,7 +9,7 @@ import db from "../db/db";
 // import Expression from "../models/Expression";
 // import Genre from "../models/Genre";
 // import Review from "../models/Review";
-// import Shelf from "../models/Shelf";
+import Shelf from "../models/Shelf";
 import User from "../models/User";
 import Test from "../models/Test";
 
@@ -43,14 +43,13 @@ router.post("/user", function(req, res) {
     { nickname: req.body.name, email: req.body.email },
     function(err, click, created) {
       if (!err) {
+        if (created) {
+          Shelf.create({ user: click._id }, function(err, result) {});
+        }
         res.status(200).json({ success: true, msg: "Success" });
       } else {
         res.status(400).json({ success: false, msg: err });
       }
-
-      User.findOrCreate({}, function(err, click, created) {
-        console.log(`Did not create a new click  ${click.googleId}`);
-      });
     }
   );
 });
