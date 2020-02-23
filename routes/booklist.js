@@ -63,6 +63,38 @@ router.post(`/`, function(req, res) {
   });
 });
 
+//getBookList
+//해당 유저가 가지고 있는 모든 booklist_id를 반환해주는 API.
+router.get("", (req, res) => {
+  // const data = req.query.googleId;
+  const {
+    query: { googleId: googleId }
+  } = req;
+  User.findOne({ googleId: googleId }, (err, result) => {
+    let booklist = result.booklists;
+    if (!err) {
+      res.status(200).json({ sucess: true, msg: "성공", booklist });
+    } else {
+      res.status(400).json({ sucess: false, msg: err });
+    }
+  });
+});
+
+//getOneBooklist
+//해당 북리스트 정보를 반환해주는 API
+router.get("/item/:id", (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  BookList.findOne({ _id: id }, (err, result) => {
+    if (!err) {
+      res.status(200).json({ success: true, msg: "success", result });
+    } else {
+      res.status(400).json({ success: false, msg: err });
+    }
+  });
+});
+
 // AddBookItem In BookList
 // 북리스트 생성 시 추가 할 책들 검색 API : OpenAPI 검색과 달리 DB 에 저장 된 부분들만 검색.
 router.get("/:title", function(req, res) {
