@@ -14,14 +14,12 @@ const BookListSchema = new Schema({
   updatedAt: {
     type: Date
   },
-  books: [{
-    type: Schema.Types.ObjectId,
-    ref: "Book"
-  }],
-  shelf: {
-    type: Schema.Types.ObjectId,
-    ref: "Shelf"
-  }
+  books: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Book"
+    }
+  ]
 });
 
 const BookList = mongoose.model("BookList", BookListSchema);

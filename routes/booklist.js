@@ -5,11 +5,14 @@ import mongoose from "mongoose";
 
 import BookList from "../models/BookList";
 import Book from "../models/Book";
+import User from "../models/User";
 
 const router = express.Router();
 
 //booklist 생성 API : 제목과 선택된 책들로 구성된 Booklist 추가.
 router.post(`/`, function(req, res) {
+  const googleId = req.body.userId;
+
   const dt = new Date();
   let newBookList = req.body;
   newBookList.createdAt = dt;
@@ -28,15 +31,30 @@ router.post(`/`, function(req, res) {
         function(err, success) {
           if (err)
             res.status(400).json({ success: false, msg: err, id: result._id });
-          else
-            res
-              .status(200)
-              .json({
-                success: true,
-                msg: "Success",
-                bookList: result,
-                result: success
-              });
+          else {
+            User.update(
+              { googleId: { $in: googleId } },
+              {
+                $push: { booklists: result._id }
+              },
+              function(err, complete) {
+                if (!err) {
+                  console.log(complete);
+                  res.status(200).json({
+                    success: true,
+                    msg: "Success",
+                    bookList: result,
+                    result: success,
+                    user: complete
+                  });
+                } else {
+                  res
+                    .status(400)
+                    .json({ success: false, msg: err, id: result._id });
+                }
+              }
+            );
+          }
         }
       );
     } else {
