@@ -64,7 +64,7 @@ router.post(`/`, function(req, res) {
 });
 
 //getBookList
-//해당 유저가 가지고 있는 모든 booklist_id를 반환해주는 API.
+//해당 유저가 가지고 있는 모든 booklist_id를 반환 API.
 router.get("", (req, res) => {
   // const data = req.query.googleId;
   const {
@@ -80,8 +80,26 @@ router.get("", (req, res) => {
   });
 });
 
+//getBooks
+//해당 북 리스트가 가지고 있는 책들 반환 API
+router.get("/detail/:id", (req, res) => {
+  const {
+    params: { id }
+  } = req;
+
+  BookList.findOne({ _id: id })
+    .populate("books")
+    .exec((err, data) => {
+      if (!err) {
+        res.status(200).json({ success: true, msg: "성공", data });
+      } else {
+        res.status(400).json({ success: false, msg: err });
+      }
+    });
+});
+
 //getOneBooklist
-//해당 북리스트 정보를 booklist_object_id를 통해 반환해주는 API
+//해당 북리스트 정보를 booklist_object_id를 통해 반환 API
 router.get("/item/:id", (req, res) => {
   const {
     params: { id }
