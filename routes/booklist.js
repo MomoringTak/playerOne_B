@@ -113,23 +113,34 @@ router.get("/:title", function(req, res) {
 
 //deleteBookList In Booklist
 //선택된 BookList 삭제.
-//문제.
 router.delete("/", function(req, res) {
   const id = req.query.id;
   BookList.deleteOne({ _id: id }, (err, result) => {
     if (!err) {
-      //해당 북릭스트 아이디를 가진 유저와 책을 찾고 해당 북리스트를 삭제하고 업데이트 시켜줄려는 로직. 구성 중.
-      //문제 : Array of ObjectId로 구성되있는 field에서 해당되는 Id를 포함하고 있다라는 컨디션을 못찾음.
-      //찾을 시 해당 booklist를 가진 user는 booklist에서 해당 booklist를 제외하고 업데이트.
-      //Update Many -> booklist를 가진 USER와 Book 찾고, 해당 booklist 제외시켜서 업데이트 ;;
-      User.find(
+      User.updateOne(
         {
           booklists: { $in: id }
         },
+        { $pull: { booklists: id } },
         (err, user) => {
           if (!err) {
-            console.log(user);
-            res.status(200).json(user);
+            Book.updateMany(
+              { booklists: { $in: id } },
+              { $pull: { booklists: id } },
+              (err, book) => {
+                if (!err) {
+                  res.status(200).json({
+                    success: true,
+                    msg: "성공",
+                    book: book,
+                    user: user,
+                    result: result
+                  });
+                } else {
+                  res.status(400).json({ success: false, msg: err });
+                }
+              }
+            );
           } else {
             res.status(400).json({ success: false, msg: err });
           }
