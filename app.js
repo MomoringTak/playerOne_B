@@ -1,10 +1,10 @@
 import express from "express";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-import cors from "cors";
 import router from "./routes/index";
 import book from "./routes/book";
 import booklist from "./routes/booklist";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import cors from "cors";
 import logger from "morgan";
 
 const app = express();

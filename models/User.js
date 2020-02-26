@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   booklists: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Booklist"
+      ref: "BookList"
     }
   ]
 });

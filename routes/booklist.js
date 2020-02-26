@@ -3,9 +3,9 @@ import express from "express";
 import db from "../db/db";
 import mongoose from "mongoose";
 
+import User from "../models/User";
 import BookList from "../models/BookList";
 import Book from "../models/Book";
-import User from "../models/User";
 
 const router = express.Router();
 
@@ -66,18 +66,19 @@ router.post(`/`, function(req, res) {
 //getBookList
 //해당 유저가 가지고 있는 모든 booklist_id를 반환 API.
 router.get("", (req, res) => {
-  // const data = req.query.googleId;
   const {
     query: { googleId: googleId }
   } = req;
-  User.findOne({ googleId: googleId }, (err, result) => {
-    let booklist = result.booklists;
-    if (!err) {
-      res.status(200).json({ sucess: true, msg: "성공", booklist });
-    } else {
-      res.status(400).json({ sucess: false, msg: err });
-    }
-  });
+
+  User.findOne({ googleId: googleId })
+    .populate("booklists")
+    .exec((err, booklist) => {
+      if (!err) {
+        res.status(200).json({ success: true, msg: "성공", booklist });
+      } else {
+        res.status(400).json({ success: false, msg: err });
+      }
+    });
 });
 
 //getBooks
