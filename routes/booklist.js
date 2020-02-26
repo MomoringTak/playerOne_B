@@ -134,6 +134,8 @@ router.get("/:title", function(req, res) {
 //선택된 BookList 삭제.
 router.delete("/", function(req, res) {
   const id = req.query.id;
+  const googleId = req.query.googleId;
+
   BookList.deleteOne({ _id: id }, (err, result) => {
     if (!err) {
       User.updateOne(
@@ -148,13 +150,17 @@ router.delete("/", function(req, res) {
               { $pull: { booklists: id } },
               (err, book) => {
                 if (!err) {
-                  res.status(200).json({
-                    success: true,
-                    msg: "성공",
-                    book: book,
-                    user: user,
-                    result: result
-                  });
+                  User.findOne({ googleId: googleId })
+                    .populate("booklists")
+                    .exec((err, booklist) => {
+                      if (!err) {
+                        res
+                          .status(200)
+                          .json({ success: true, msg: "성공", booklist });
+                      } else {
+                        res.status(400).json({ success: false, msg: err });
+                      }
+                    });
                 } else {
                   res.status(400).json({ success: false, msg: err });
                 }
