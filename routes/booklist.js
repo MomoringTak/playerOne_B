@@ -18,49 +18,103 @@ router.post(`/`, function(req, res) {
   newBookList.createdAt = dt;
   newBookList.updatedAt = dt;
 
-  BookList.create(newBookList, function(err, result) {
-    if (!err) {
-      let booksIds = result.books;
-      booksIds = booksIds.map(item => {
-        item = mongoose.Types.ObjectId(item);
-        return item;
+  var async = require('async');
+  var bookListCreateResult;
+  var bookUpdateResult;
+  var userUpdateResult;
+  var Tasks = [
+    function(callback) {
+      BookList.create(newBookList, function(err, result) {
+        if (!err) {
+          bookListCreateResult = result;
+          callback(null);
+        } 
+        else callback(err);
       });
+    },
+    function(callback) {
       Book.updateMany(
-        { _id: { $in: booksIds } },
-        { $push: { booklists: result._id } },
-        function(err, success) {
-          if (err)
-            res.status(400).json({ success: false, msg: err, id: result._id });
-          else {
-            User.update(
-              { googleId: { $in: googleId } },
-              {
-                $push: { booklists: result._id }
-              },
-              function(err, complete) {
-                if (!err) {
-                  console.log(complete);
-                  res.status(200).json({
-                    success: true,
-                    msg: "Success",
-                    bookList: result,
-                    result: success,
-                    user: complete
-                  });
-                } else {
-                  res
-                    .status(400)
-                    .json({ success: false, msg: err, id: result._id });
-                }
-              }
-            );
+        { _id: { $in: bookListCreateResult.books } },
+        { $push: { booklists: bookListCreateResult._id } },
+        function(err, result) {
+          if(!err) {
+            bookUpdateResult = result;
+            callback(null);
           }
+          else callback(err);
         }
       );
-    } else {
-      res.status(400).json({ success: false, msg: err });
+    },
+    function(callback) {
+      User.update(
+        { googleId: { $in: googleId } },
+        { $push: { booklists: bookListCreateResult._id } },
+        function(err, result) {
+          if (!err) {
+            userUpdateResult = result;
+            callback(null);
+          } 
+          else callback(err);
+        }
+      );
+    }
+  ];
+
+  async.series(Tasks, function (err, results) {
+    if (err != null) res.status(400).json({ success: false, msg: err });
+    else {
+      res.status(200).json({
+        success: true,
+        msg: "Success",
+        bookList: bookListCreateResult,
+        result: bookUpdateResult,
+        user: userUpdateResult
+      });
     }
   });
+
+  // BookList.create(newBookList, function(err, result) {
+  //   if (!err) {
+  //     let booksIds = result.books;
+  //     Book.updateMany(
+  //       { _id: { $in: booksIds } },
+  //       { $push: { booklists: result._id } },
+  //       function(err, success) {
+  //         if (err)
+  //           res.status(400).json({ success: false, msg: err, id: result._id });
+  //         else {
+  //           User.update(
+  //             { googleId: { $in: googleId } },
+  //             {
+  //               $push: { booklists: result._id }
+  //             },
+  //             function(err, complete) {
+  //               if (!err) {
+  //                 console.log(complete);
+  //                 res.status(200).json({
+  //                   success: true,
+  //                   msg: "Success",
+  //                   bookList: result,
+  //                   result: success,
+  //                   user: complete
+  //                 });
+  //               } else {
+  //                 res
+  //                   .status(400)
+  //                   .json({ success: false, msg: err, id: result._id });
+  //               }
+  //             }
+  //           );
+  //         }
+  //       }
+  //     );
+  //   } else {
+  //     res.status(400).json({ success: false, msg: err });
+  //   }
+  // });
+
+
+  
 });
 
 //getBookList
@@ -71,7 +125,15 @@ router.get("", (req, res) => {
   } = req;
 
   User.findOne({ googleId: googleId })
-    .populate("booklists")
+    .populate({
+      path: "booklists",
+      model: "BookList",
+      populate: {
+        path: "books",
+        model: 'Book',
+        select: "image"
+      }
+    })
     .exec((err, booklist) => {
       if (!err) {
         res.status(200).json({ success: true, msg: "성공", booklist });
