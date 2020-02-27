@@ -18,18 +18,18 @@ router.post(`/`, function(req, res) {
   newBookList.createdAt = dt;
   newBookList.updatedAt = dt;
 
-  var async = require('async');
+  var async = require("async");
   var bookListCreateResult;
   var bookUpdateResult;
   var userUpdateResult;
+
   var Tasks = [
     function(callback) {
       BookList.create(newBookList, function(err, result) {
         if (!err) {
           bookListCreateResult = result;
           callback(null);
-        } 
-        else callback(err);
+        } else callback(err);
       });
     },
     function(callback) {
@@ -37,11 +37,10 @@ router.post(`/`, function(req, res) {
         { _id: { $in: bookListCreateResult.books } },
         { $push: { booklists: bookListCreateResult._id } },
         function(err, result) {
-          if(!err) {
+          if (!err) {
             bookUpdateResult = result;
             callback(null);
-          }
-          else callback(err);
+          } else callback(err);
         }
       );
     },
@@ -53,14 +52,13 @@ router.post(`/`, function(req, res) {
           if (!err) {
             userUpdateResult = result;
             callback(null);
-          } 
-          else callback(err);
+          } else callback(err);
         }
       );
     }
   ];
 
-  async.series(Tasks, function (err, results) {
+  async.series(Tasks, function(err, results) {
     if (err != null) res.status(400).json({ success: false, msg: err });
     else {
       res.status(200).json({
@@ -72,49 +70,6 @@ router.post(`/`, function(req, res) {
       });
     }
   });
-
-  // BookList.create(newBookList, function(err, result) {
-  //   if (!err) {
-  //     let booksIds = result.books;
-  //     Book.updateMany(
-  //       { _id: { $in: booksIds } },
-  //       { $push: { booklists: result._id } },
-  //       function(err, success) {
-  //         if (err)
-  //           res.status(400).json({ success: false, msg: err, id: result._id });
-  //         else {
-  //           User.update(
-  //             { googleId: { $in: googleId } },
-  //             {
-  //               $push: { booklists: result._id }
-  //             },
-  //             function(err, complete) {
-  //               if (!err) {
-  //                 console.log(complete);
-  //                 res.status(200).json({
-  //                   success: true,
-  //                   msg: "Success",
-  //                   bookList: result,
-  //                   result: success,
-  //                   user: complete
-  //                 });
-  //               } else {
-  //                 res
-  //                   .status(400)
-  //                   .json({ success: false, msg: err, id: result._id });
-  //               }
-  //             }
-  //           );
-  //         }
-  //       }
-  //     );
-  //   } else {
-  //     res.status(400).json({ success: false, msg: err });
-  //   }
-  // });
-
-
-  
 });
 
 //getBookList
@@ -130,7 +85,7 @@ router.get("", (req, res) => {
       model: "BookList",
       populate: {
         path: "books",
-        model: 'Book',
+        model: "Book",
         select: "image"
       }
     })

@@ -2,6 +2,9 @@
 import express from "express";
 import axios from "axios";
 import Book from "../models/Book";
+import Comment from "../models/Comment";
+import User from "../models/User";
+
 import db from "../db/db";
 
 const router = express.Router();
@@ -32,7 +35,6 @@ router.get("/:title/:display", function(req, res) {
 
   const showBook = async (title, display) => {
     const { data } = await getBook(title, display);
-    console.log(data.items);
     res.status(200).json(data.items);
   };
 
@@ -89,4 +91,40 @@ router.post("/", function(req, res) {
   });
 });
 
+//commentBook
+//댓글모델에 해당 책 및 작성자 저장 API
+router.post("/comment", (req, res) => {
+  const { body: comment } = req;
+  const dt = new Date();
+
+  //updating time in comment
+  comment.createdAt = dt;
+  comment.updatedAt = dt;
+  Comment.create(comment, (err, commentResult) => {
+    if (!err) {
+      res.status(200).json({ success: true, msg: "성공", commentResult });
+    } else {
+      res.status(400).json({ success: false, msg: err });
+    }
+  });
+});
+
+//bookComment
+//해당 책에 달려있는 댓글들 호출 API.
+router.get("/comment/:id", (req, res) => {
+  console.log(req.params);
+  const {
+    params: { id: bookId }
+  } = req;
+
+  console.log(bookId);
+
+  Comment.find({ book: bookId }, (err, commentResult) => {
+    if (!err) {
+      res.status(200).json({ success: true, msg: "성공", commentResult });
+    } else {
+      res.status(400).json({ success: false, msg: err });
+    }
+  });
+});
 export default router;
