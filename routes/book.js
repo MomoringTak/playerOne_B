@@ -109,22 +109,4 @@ router.post("/comment", (req, res) => {
   });
 });
 
-//bookComment
-//해당 책에 달려있는 댓글들 호출 API.
-router.get("/comment/:id", (req, res) => {
-  console.log(req.params);
-  const {
-    params: { id: bookId }
-  } = req;
-
-  console.log(bookId);
-
-  Comment.find({ book: bookId }, (err, commentResult) => {
-    if (!err) {
-      res.status(200).json({ success: true, msg: "성공", commentResult });
-    } else {
-      res.status(400).json({ success: false, msg: err });
-    }
-  });
-});
 export default router;

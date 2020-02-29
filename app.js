@@ -2,6 +2,7 @@ import express from "express";
 import router from "./routes/index";
 import book from "./routes/book";
 import booklist from "./routes/booklist";
+import comment from "./routes/comment";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use("/", router);
 app.use("/book", book);
 app.use("/booklist", booklist);
+app.use("/comment", comment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
