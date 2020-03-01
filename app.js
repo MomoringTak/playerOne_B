@@ -1,25 +1,31 @@
 import express from "express";
-import router from "./routes/index";
-import book from "./routes/book";
-import booklist from "./routes/booklist";
-import comment from "./routes/comment";
+
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
 import logger from "morgan";
 
+import routes from "./routes";
+
+import globalRouter from "./routes/index";
+import userRouter from "./routes/user";
+import bookRouter from "./routes/book";
+import booklistRouter from "./routes/booklist";
+import commentRouter from "./routes/comment";
+
 const app = express();
 
 app.use(logger("dev"));
-app.use(cors()); //add cors
+app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true })); //false ==> true
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/", router);
-app.use("/book", book);
-app.use("/booklist", booklist);
-app.use("/comment", comment);
+app.use(routes.home, globalRouter);
+app.use(routes.users, userRouter);
+app.use(routes.books, bookRouter);
+app.use(routes.booklists, booklistRouter);
+app.use(routes.comments, commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

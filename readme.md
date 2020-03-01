@@ -1,17 +1,4 @@
-# Nomathon Player One B-Repo
+# Nomathon What The BOOK API DOCUMENTATION
 
----
-
-## NodeJS w/ Mongoose (MongoDB)
-
-#### Models
-
-##### Schema(Collection)
-
-1. User
-2. Author
-3. Book
-4. Shelf
-5. BookList
-6. Comment
-7. Review
+## TO DO LIST 
+https://www.notion.so/mightytak/9b9d440b0e9c4423b5cc86a2dc3bf53a

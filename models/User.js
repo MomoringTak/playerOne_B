@@ -4,9 +4,19 @@ import findOrCreate from "mongoose-findorcreate";
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  googleId: String,
-  email: String,
-  nickname: String,
+  googleId: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  nickname: { type: String, required: true },
+  age: {
+    type: Number,
+    required: true
+  },
   booklists: [
     {
       type: Schema.Types.ObjectId,
