@@ -34,13 +34,19 @@ router.get("/:id", (req, res) => {
 //해당 유저가 남긴 댓글을 삭제하는 API.
 router.delete("/", (req, res) => {
   const {
-    query: { id }
+    query: { id, bookId }
   } = req;
-  console.log(id);
-
-  Comment.deleteOne({ _id: id }, (err, deleteResult) => {
+  Comment.deleteOne({ uuid: id }, (err, deleteResult) => {
     if (!err) {
-      res.status(200).json({ success: true, msg: "성공", deleteResult });
+      Comment.find({ book: bookId })
+        .populate("user")
+        .exec((err, commentResult) => {
+          if (!err) {
+            res.status(200).json({ success: true, msg: "성공", commentResult });
+          } else {
+            res.status(400).json({ success: false, msg: err });
+          }
+        });
     } else {
       res.status(400).json({ success: false, msg: err });
     }
