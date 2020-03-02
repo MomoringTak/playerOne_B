@@ -1,4 +1,4 @@
-import BookList from "../../models/BookList";
+import User from "../../models/User";
 
 const getBooklist = (req, res) => {
   const {

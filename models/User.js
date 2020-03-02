@@ -14,8 +14,7 @@ const UserSchema = new Schema({
   },
   nickname: { type: String, required: true },
   age: {
-    type: Number,
-    required: true
+    type: Number
   },
   booklists: [
     {

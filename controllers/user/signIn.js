@@ -1,9 +1,17 @@
 import User from "../../models/User";
 
 const signIn = async (req, res) => {
+  const {
+    body: { googleId, name, email }
+  } = req;
+
+  console.log(googleId);
+  console.log(name);
+  console.log(email);
+
   User.findOrCreate(
-    { googleId: req.body.googleId },
-    { nickname: req.body.name, email: req.body.email },
+    { googleId: googleId },
+    { nickname: name, email: email },
     (err, click, created) => {
       if (!err) {
         res.status(200).json({ success: true, msg: "Success" });

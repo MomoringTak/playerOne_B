@@ -49,9 +49,9 @@ const UPLOAD_BOOKLIST = `/upload`;
 //deleteBookList DELETE API : 선택된 BookList 삭제.
 const DELETE_BOOKLIST = `/delete`;
 
-//getBooks <- 아직 해당사항 안됨.
+//getBooks
 //해당 북 리스트가 가지고 있는 책들 반환 API
-const BOOK_DETAIL = "/detail/:id";
+const GET_BOOKLIST_DETAIL = "/detail/:id";
 
 //getOneBooklist
 //해당 북리스트 정보를 booklist_object_id를 통해 반환 API
@@ -87,6 +87,7 @@ const routes = {
   commentBook: COMMENT_BOOK,
   booklists: BOOKLISTS,
   getBooklist: GET_BOOKLIST,
+  getBooklistDetail: GET_BOOKLIST_DETAIL,
   uploadBooklist: UPLOAD_BOOKLIST,
   deleteBookList: DELETE_BOOKLIST,
   getOneBooklist: GET_ONE_BOOKLIST,

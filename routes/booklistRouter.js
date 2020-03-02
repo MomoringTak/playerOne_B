@@ -6,7 +6,8 @@ import {
   getBooklist,
   getOneBooklist,
   searchBook,
-  deleteBooklist
+  deleteBooklist,
+  getBooklistDetail
 } from "../controllers/booklistController";
 
 const booklistRouter = express.Router();
@@ -18,9 +19,13 @@ booklistRouter.post(routes.uploadBooklist, uploadBooklist);
 //해당 유저가 가지고 있는 모든 booklist_id를 반환 API.
 booklistRouter.get(routes.getBooklist, getBooklist);
 
+//getBooklistDetail
+//해당 북 리스트가 가지고 있는 책들 반환 API
+booklistRouter.get(routes.getBooklistDetail, getBooklistDetail);
+
 //getOneBooklist
 //해당 북리스트 정보를 booklist_object_id를 통해 반환 API
-booklistRouter.get(routes.getOneBooklist, getOneBooklist);
+// booklistRouter.get(routes.getOneBooklist, getOneBooklist);
 
 // AddBookItem In BookList
 // 북리스트 생성 시 추가 할 책들 검색 API : OpenAPI 검색과 달리 DB 에 저장 된 부분들만 검색.
@@ -31,21 +36,3 @@ booklistRouter.get(routes.searchBook, searchBook);
 booklistRouter.delete(routes.deleteBookList, deleteBooklist);
 
 export default booklistRouter;
-
-//getBooks
-//해당 북 리스트가 가지고 있는 책들 반환 API
-// booklistRouter.get("/detail/:id", (req, res) => {
-//   const {
-//     params: { id }
-//   } = req;
-
-//   BookList.findOne({ _id: id })
-//     .populate("books")
-//     .exec((err, data) => {
-//       if (!err) {
-//         res.status(200).json({ success: true, msg: "성공", data });
-//       } else {
-//         res.status(400).json({ success: false, msg: err });
-//       }
-//     });
-// });

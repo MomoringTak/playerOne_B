@@ -1,10 +1,11 @@
 import Book from "../../models/Book";
 
-const getBookDetail = (res, req) => {
+const getBookDetail = (req, res) => {
   const {
-    params: { id: id }
+    params: { id }
   } = req;
-  Book.findOne({ isbn: id }, function(err, book) {
+
+  Book.findOne({ isbn: id }, (err, book) => {
     if (book) {
       res.status(200).json({ book: book, success: true, msg: "fkkk" });
     } else {
