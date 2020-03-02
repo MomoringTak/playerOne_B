@@ -1,6 +1,5 @@
 //Dependencies
 import express from "express";
-
 const globalRouter = express.Router();
 
 /// Method: Get, Route '/'

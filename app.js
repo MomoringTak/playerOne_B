@@ -1,17 +1,17 @@
 import express from "express";
 
+import db from "./db/db";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
 import logger from "morgan";
 
 import routes from "./routes";
-
 import globalRouter from "./routes/index";
-import userRouter from "./routes/user";
-import bookRouter from "./routes/book";
-import booklistRouter from "./routes/booklist";
-import commentRouter from "./routes/comment";
+import userRouter from "./routes/userRouter";
+import bookRouter from "./routes/bookRouter";
+import booklistRouter from "./routes/booklistRouter";
+import commentRouter from "./routes/commentRouter";
 
 const app = express();
 

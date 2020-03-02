@@ -1,4 +1,5 @@
 import BookList from "../../models/BookList";
+import async from "async";
 
 const uploadBooklist = (req, res) => {
   const googleId = req.body.userId;
@@ -8,10 +9,9 @@ const uploadBooklist = (req, res) => {
   newBookList.createdAt = dt;
   newBookList.updatedAt = dt;
 
-  const async = require("async");
-  const bookListCreateResult;
-  const bookUpdateResult;
-  const userUpdateResult;
+  let bookListCreateResult;
+  let bookUpdateResult;
+  let userUpdateResult;
 
   const Tasks = [
     callback => {

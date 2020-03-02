@@ -1,12 +1,5 @@
-//app
-
-app.use("/", router);
-app.use("/book", book);
-app.use("/booklist", booklist);
-app.use("/comment", comment);
-
+//Routes
 //index.js
-
 const HOME = "/";
 
 //user.js

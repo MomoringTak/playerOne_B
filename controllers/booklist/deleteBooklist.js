@@ -1,6 +1,6 @@
-import BookList from "../models/BookList";
-import Book from "../models/Book";
-import User from "../models/User";
+import BookList from "../../models/BookList";
+import Book from "../../models/Book";
+import User from "../../models/User";
 
 const deleteBookList = (req, res) => {
   const id = req.query.id;
