@@ -1,7 +1,7 @@
 import { createToken } from "../../secret/verify";
 import bcrypt from "bcrypt-nodejs";
 
-const login = async (req, res) => {
+const wtbSignIn = async (req, res) => {
     const {
       body: { email, password }
     } = req;
@@ -33,4 +33,4 @@ const login = async (req, res) => {
 
   };
   
-  export default login;
+  export default wtbSignIn;
