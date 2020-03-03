@@ -7,7 +7,8 @@ import {
   getAllBook,
   uploadBook,
   commentBook,
-  getBookDetail
+  getBookDetail,
+  addToBooklist
 } from "../controllers/bookController";
 
 const bookRouter = express.Router();
@@ -31,5 +32,7 @@ bookRouter.post(routes.uploadBook, uploadBook);
 //commentBook
 //댓글모델에 해당 책 및 작성자 저장 API
 bookRouter.post(routes.commentBook, commentBook);
+
+bookRouter.post(routes.addToBooklist, addToBooklist);
 
 export default bookRouter;
