@@ -1,4 +1,4 @@
-export { default as signIn } from "./user/signIn";
+export { default as googleSignIn } from "./user/googleSignIn";
 export { default as updateUser } from "./user/updateUser";
 export { default as getUser } from "./user/getUser";
-export { default as login } from "./user/login";
+export { default as wtbSignIn } from "./user/wtbSignIn";

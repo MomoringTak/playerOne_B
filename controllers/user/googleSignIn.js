@@ -1,6 +1,6 @@
 import User from "../../models/User";
 
-const signIn = async (req, res) => {
+const googleSignIn = async (req, res) => {
   const {
     body: { googleId, name, email }
   } = req;
@@ -22,4 +22,4 @@ const signIn = async (req, res) => {
   );
 };
 
-export default signIn;
+export default googleSignIn;
