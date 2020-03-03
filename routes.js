@@ -11,6 +11,8 @@ const USER_DETAIL = "/:googleId";
 //POST new User or Find
 const ADD_USER = "/add";
 
+const USER_LOGIN = "/login";
+
 //book.js
 //Book
 const BOOK = "/books";
@@ -78,6 +80,7 @@ const routes = {
   home: HOME,
   users: USERS,
   userDetail: USER_DETAIL,
+  userLogin: USER_LOGIN,
   addUser: ADD_USER,
   books: BOOK,
   getBook: GET_BOOK,
