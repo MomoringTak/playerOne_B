@@ -40,6 +40,10 @@ const BookSchema = new Schema({
   genre: {
     category: []
   },
+  views: {
+    type: Number,
+    default: 0
+  },
   booklists: [
     {
       type: Schema.Types.ObjectId,
