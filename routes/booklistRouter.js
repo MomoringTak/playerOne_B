@@ -9,6 +9,7 @@ import {
   deleteBooklist,
   getBooklistDetail
 } from "../controllers/booklistController";
+import { checkToken } from "../secret/verify";
 
 const booklistRouter = express.Router();
 
@@ -17,7 +18,7 @@ booklistRouter.post(routes.uploadBooklist, uploadBooklist);
 
 //getBookList
 //해당 유저가 가지고 있는 모든 booklist_id를 반환 API.
-booklistRouter.get(routes.getBooklist, getBooklist);
+booklistRouter.get(routes.getBooklist, checkToken, getBooklist);
 
 //getBooklistDetail
 //해당 북 리스트가 가지고 있는 책들 반환 API

@@ -3,7 +3,12 @@ import jwt from "jsonwebtoken";
 import config from "./config";
 
 function checkToken(req, res, next) {
-    const token = req.headers['x-access-token'];
+    //const token = req.headers['x-access-token'];
+    console.log(req.params);
+    console.log(req.body);
+    console.log(req.query);
+    console.log(req.headers);
+    const token = req.get('Authorization').toString().replace("Bearer ", "");
     jwt.verify(token, config.secretKey, (err, decoded) => {
         if(err) res.status(401).send({ success: false, err: err});
         else { 

@@ -1,4 +1,5 @@
 import User from "../../models/User";
+import { createToken } from "../../secret/verify";
 
 const googleSignIn = async (req, res) => {
   const {
@@ -14,7 +15,13 @@ const googleSignIn = async (req, res) => {
     { nickname: name, email: email },
     (err, click, created) => {
       if (!err) {
-        res.status(200).json({ success: true, msg: "Success" });
+        const user = {
+          email: email,
+          nickname: name,
+          googleId: googleId
+        }
+
+        res.status(200).json({ success: true, msg: "Success", id_token: createToken(user) });
       } else {
         res.status(400).json({ success: false, msg: err });
       }
