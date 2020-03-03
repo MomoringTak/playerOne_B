@@ -28,6 +28,8 @@ const GET_ALLBOOK = "/";
 //addBook POST : 책 추가 API : Add Book 스크린에서 선택된 책들 DB에 저장.
 const UPLOAD_BOOK = "/upload";
 
+const ADD_BOOK_TO_BOOKLIST = "/addbook-to-booklist/:bookId/:booklistId";
+
 //getBookDetail
 // 선택 된 책(Single) 정보 제공 API : isbn 키워드로 DB에서 해당되는 책 정보를 찾아 클라이언트에게 제공.
 const GET_BOOK_DETAIL = "/:id";
@@ -86,6 +88,7 @@ const routes = {
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,
   uploadBook: UPLOAD_BOOK,
+  addToBooklist: ADD_BOOK_TO_BOOKLIST,
   getBookDetail: GET_BOOK_DETAIL,
   commentBook: COMMENT_BOOK,
   booklists: BOOKLISTS,

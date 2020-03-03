@@ -3,11 +3,11 @@ import BookList from "../../models/BookList";
 
 const addToBooklist = (req, res) => {
   const {
-    query: { bookId, booklistId }
+    params: { bookId, booklistId }
   } = req;
 
   BookList.updateMany(
-    { _id: booklistId },
+    { _id: { $in: booklistId } },
     { $push: { books: bookId } },
     (err, updateResult) => {
       if (!err) {
