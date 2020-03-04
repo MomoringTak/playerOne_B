@@ -6,8 +6,12 @@ const HOME = "/";
 //User
 const USERS = "/users";
 
-// GET || PATCH USER
-const USER_DETAIL = "/:googleId";
+// GET
+const USER_DETAIL = "/";
+
+// PATCH USER
+const PATCH_USER = "/:googleId";
+
 //POST new User or Find
 const ADD_USER = "/add";
 
@@ -82,6 +86,7 @@ const routes = {
   home: HOME,
   users: USERS,
   userDetail: USER_DETAIL,
+  patchUser: PATCH_USER,
   userLogin: USER_LOGIN,
   addUser: ADD_USER,
   books: BOOK,

@@ -12,7 +12,7 @@ const getBooklist = (req, res) => {
       populate: {
         path: "books",
         model: "Book",
-        select: ["image", "title", "author",]
+        select: ["image", "title", "author", "publisher"]
       }
     })
     .exec((err, booklist) => {

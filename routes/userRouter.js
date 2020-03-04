@@ -5,9 +5,9 @@ import { checkToken } from "../secret/verify";
 
 const userRouter = express.Router();
 
-userRouter.get(routes.userDetail, getUser);
+userRouter.get(routes.userDetail, checkToken, getUser);
 userRouter.post(routes.addUser, googleSignIn);
-userRouter.patch(routes.userDetail, updateUser);
+userRouter.patch(routes.patchUser, updateUser);
 userRouter.post(routes.userLogin, wtbSignIn);
 userRouter.post("/check", checkToken, function(req, res, next) {
     res.status(200).json(req.user);
