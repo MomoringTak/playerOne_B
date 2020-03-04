@@ -5,8 +5,9 @@ import User from "../../models/User";
 import async from "async";
 
 const uploadBooklist = (req, res) => {
-  const googleId = req.body.userId;
-
+  const {
+    body: { userId: googleId }
+  } = req;
   const dt = new Date();
   const newBookList = req.body;
   newBookList.createdAt = dt;
@@ -51,7 +52,7 @@ const uploadBooklist = (req, res) => {
     }
   ];
 
-  async.series(Tasks, function(err, results) {
+  async.series(Tasks, (err, results) => {
     if (err != null) res.status(400).json({ success: false, msg: err });
     else {
       res.status(200).json({

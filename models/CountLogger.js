@@ -24,6 +24,7 @@ const CountLoggerSchema = new Schema({
       ref: "User"
     }
   ]
+  //시간추가
 });
 
 const CountLogger = mongoose.model("CountLogger", CountLoggerSchema);

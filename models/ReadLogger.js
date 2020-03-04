@@ -6,8 +6,7 @@ const Schema = mongoose.Schema;
 
 const ReadLoggerSchema = new Schema({
   genre: {
-    type: String,
-    required: true
+    type: String
   },
   age: {
     type: Number,
