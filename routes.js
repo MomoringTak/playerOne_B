@@ -2,6 +2,10 @@
 //index.js
 const HOME = "/";
 
+///  \_O.O_/  ======  OTL
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  \_O.O_/  ======  OTL
+
 //user.js
 //User
 const USERS = "/users";
@@ -16,6 +20,10 @@ const PATCH_USER = "/:googleId";
 const ADD_USER = "/add";
 
 const USER_LOGIN = "/login";
+
+///  \_O.O_/  ======  OTL
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  \_O.O_/  ======  OTL
 
 //book.js
 //Book
@@ -41,6 +49,10 @@ const GET_BOOK_DETAIL = "/:id";
 //commentBook
 //댓글모델에 해당 책 및 작성자 저장 API
 const COMMENT_BOOK = "/comment";
+
+///  \_O.O_/  ======  OTL
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  \_O.O_/  ======  OTL
 
 //booklist.js
 //Booklist
@@ -69,6 +81,10 @@ const GET_ONE_BOOKLIST = "/item:/:id";
 // 북리스트 생성 시 추가 할 책들 검색 API : OpenAPI 검색과 달리 DB 에 저장 된 부분들만 검색.
 const SEARCH_BOOK = "/:title";
 
+///  \_O.O_/  ======  OTL
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+///  \_O.O_/  ======  OTL
+
 //comment.js
 //Comment
 const COMMENTS = "/comments";
@@ -81,6 +97,8 @@ const BOOK_COMMENT = "/:id";
 //deleteComment
 //해당 유저가 남긴 댓글을 삭제하는 API.
 const DELETE_COMMENT = "/delete";
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const routes = {
   home: HOME,

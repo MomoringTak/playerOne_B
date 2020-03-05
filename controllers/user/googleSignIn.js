@@ -6,10 +6,6 @@ const googleSignIn = async (req, res) => {
     body: { googleId, name, email }
   } = req;
 
-  console.log(googleId);
-  console.log(name);
-  console.log(email);
-
   User.findOrCreate(
     { googleId: googleId },
     { nickname: name, email: email },
@@ -19,8 +15,10 @@ const googleSignIn = async (req, res) => {
           email: email,
           nickname: name,
           googleId: googleId
-        }
-        res.status(200).json({ success: true, msg: "Success", id_token: createToken(user) });
+        };
+        res
+          .status(200)
+          .json({ success: true, msg: "Success", id_token: createToken(user) });
       } else {
         res.status(400).json({ success: false, msg: err });
       }
