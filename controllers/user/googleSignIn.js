@@ -6,24 +6,21 @@ const googleSignIn = async (req, res) => {
     body: { googleId, name, email }
   } = req;
 
-  User.findOrCreate(
-    { googleId: googleId },
-    { nickname: name, email: email },
-    (err, click, created) => {
-      if (!err) {
-        const user = {
-          email: email,
-          nickname: name,
-          googleId: googleId
-        };
-        res
-          .status(200)
-          .json({ success: true, msg: "Success", id_token: createToken(user) });
-      } else {
-        res.status(400).json({ success: false, msg: err });
-      }
-    }
-  );
+  const { body: user } = req;
+
+  try {
+    await User.findOrCreate(
+      { googleId: googleId },
+      { nickname: name, email: email }
+    );
+
+    res
+      .status(200)
+      .json({ success: true, msg: "Success", id_token: createToken(user) });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ success: false });
+  }
 };
 
 export default googleSignIn;
