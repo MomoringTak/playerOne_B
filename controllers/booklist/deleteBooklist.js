@@ -3,7 +3,6 @@ import Book from "../../models/Book";
 import User from "../../models/User";
 
 import async from "async";
-import e from "express";
 
 const deleteBookList = (req, res) => {
   const {

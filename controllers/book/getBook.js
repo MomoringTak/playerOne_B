@@ -11,7 +11,7 @@ const api = axios.create({
 
 const getBook = (req, res) => {
   const {
-    params: { title: title, display: display }
+    params: { title, display }
   } = req;
 
   const getBook = (title, display) =>
@@ -23,8 +23,12 @@ const getBook = (req, res) => {
     });
 
   const showBook = async (title, display) => {
-    const { data } = await getBook(title, display);
-    res.status(200).json(data.items);
+    try {
+      const { data } = await getBook(title, display);
+      res.status(200).json(data.items);
+    } catch (err) {
+      res.status(400).json({ success: false, msg: err });
+    }
   };
 
   showBook(title, display);

@@ -11,10 +11,12 @@ const CommentSchema = new Schema({
   },
   createdAt: {
     type: Date,
+    default: Date.now,
     required: true
   },
   updatedAt: {
     type: Date,
+    default: Date.now,
     required: true
   },
   uuid: {
