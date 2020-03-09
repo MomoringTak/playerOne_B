@@ -5,16 +5,21 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   googleId: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
     required: true
   },
   nickname: { type: String, required: true },
+  password: {
+    type: String
+  },
   age: {
     type: Number
+  },
+  gender: {
+    type: String
   },
   booklists: [
     {

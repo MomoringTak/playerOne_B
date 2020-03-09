@@ -17,9 +17,8 @@ const googleSignIn = async (req, res) => {
     res
       .status(200)
       .json({ success: true, msg: "Success", id_token: createToken(user) });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ success: false });
+  } catch (err) {
+    res.status(400).json({ success: false, msg: err });
   }
 };
 
