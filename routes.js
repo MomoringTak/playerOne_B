@@ -21,6 +21,9 @@ const ADD_USER = "/add";
 
 const USER_LOGIN = "/login";
 
+const WTB_SIGNUP = "/signup";
+
+const WTB_SIGNIN = "/signin";
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -107,6 +110,8 @@ const routes = {
   patchUser: PATCH_USER,
   userLogin: USER_LOGIN,
   addUser: ADD_USER,
+  wtbSignUp: WTB_SIGNUP,
+  wtbSignIn: WTB_SIGNIN,
   books: BOOK,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,

@@ -1,36 +1,31 @@
 import { createToken } from "../../secret/verify";
 import bcrypt from "bcrypt-nodejs";
+import User from "../../models/User";
 
 const wtbSignIn = async (req, res) => {
-    const {
-      body: { email, password }
-    } = req;
-  
-    // console.log(googleId);
-    // console.log(name);
-    // console.log(email);
-  
-    // User.findOrCreate(
-    //   { googleId: googleId },
-    //   { nickname: name, email: email },
-    //   (err, click, created) => {
-    //     if (!err) {
-    //       res.status(200).json({ success: true, msg: "Success" });
-    //     } else {
-    //       res.status(400).json({ success: false, msg: err });
-    //     }
-    //   }
-    // );
+  const {
+    body: { email, password }
+  } = req;
+  const { body: user } = req;
 
-    const user = {
-        email: email,
-        password: password
+  try {
+    const result = await User.find({ email: email, password: password });
+    if (result.length >= 1)
+      res
+        .status(201)
+        .send({ success: true, msg: "성공", id_token: createToken(user) });
+    else {
+      res.status(400).json({
+        success: false,
+        msg: "매칭되는 유저 정보가 아닙니다"
+      });
     }
-
-    res.status(201).send({
-        id_token: createToken(user)
+  } catch (err) {
+    res.status(400).json({
+      msg: err,
+      success: false
     });
+  }
+};
 
-  };
-  
-  export default wtbSignIn;
+export default wtbSignIn;

@@ -1,18 +1,16 @@
 import User from "../../models/User";
 
 const getUser = async (req, res) => {
-  // const {
-  //   params: { googleId: googleId }
-  // } = req;
-  // console.log(req.user);
+  const {
+    user: { email }
+  } = req;
 
-  User.findOne({ email: req.user.email }, (err, user) => {
-    if (user) {
-      res.status(200).json({ user: user, success: true, msg: "Success" });
-    } else {
-      res.status(400).json({ success: false, msg: err });
-    }
-  });
+  try {
+    const user = User.findOne({ email: email });
+    res.status(200).json({ user, success: true, msg: "Success" });
+  } catch (err) {
+    res.status(400).json({ success: false, msg: err });
+  }
 };
 
 export default getUser;
