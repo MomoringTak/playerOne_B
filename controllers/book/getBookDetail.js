@@ -6,8 +6,8 @@ const getBookDetail = async (req, res) => {
   } = req;
 
   try {
-    const book = Book.findOne({ isbn: id });
-    res.status(200).json({ book: book, success: true, msg: "fkkk" });
+    const book = await Book.findOne({ isbn: id });
+    res.status(200).json({ book, success: true, msg: "성공" });
   } catch (err) {
     res.status(400).json({ sucess: false, msg: err });
   }
