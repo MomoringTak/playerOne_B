@@ -14,7 +14,7 @@ const USERS = "/users";
 const USER_DETAIL = "/";
 
 // PATCH USER
-const PATCH_USER = "/:googleId";
+const PATCH_USER = "/update";
 
 //POST new User or Find
 const GOOGLE_SIGNIN = "/googleSignIn";
