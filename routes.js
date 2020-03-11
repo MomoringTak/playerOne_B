@@ -17,7 +17,7 @@ const USER_DETAIL = "/";
 const PATCH_USER = "/:googleId";
 
 //POST new User or Find
-const ADD_USER = "/add";
+const GOOGLE_SIGNIN = "/googleSignIn";
 
 const USER_LOGIN = "/login";
 
@@ -109,7 +109,7 @@ const routes = {
   userDetail: USER_DETAIL,
   patchUser: PATCH_USER,
   userLogin: USER_LOGIN,
-  addUser: ADD_USER,
+  googleSignIn: GOOGLE_SIGNIN,
   wtbSignUp: WTB_SIGNUP,
   wtbSignIn: WTB_SIGNIN,
   books: BOOK,
