@@ -6,7 +6,7 @@ import async from "async";
 
 const uploadBooklist = (req, res) => {
   const {
-    body: { userId: googleId }
+    body: { userId }
   } = req;
   const dt = new Date();
   const newBookList = req.body;
@@ -40,7 +40,7 @@ const uploadBooklist = (req, res) => {
     },
     callback => {
       User.update(
-        { googleId: { $in: googleId } },
+        { _id: { $in: userId } },
         { $push: { booklists: bookListCreateResult._id } },
         (err, result) => {
           if (!err) {

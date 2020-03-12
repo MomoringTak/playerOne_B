@@ -2,10 +2,10 @@ import User from "../../models/User";
 
 const getBooklist = (req, res) => {
   const {
-    query: { googleId: googleId }
+    query: { email }
   } = req;
 
-  User.findOne({ googleId: googleId })
+  User.findOne({ email: email })
     .populate({
       path: "booklists",
       model: "BookList",

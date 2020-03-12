@@ -6,7 +6,7 @@ import async from "async";
 
 const deleteBookList = (req, res) => {
   const {
-    query: { id, googleId }
+    query: { id, email }
   } = req;
 
   let BookListDeleteResult;
@@ -56,7 +56,7 @@ const deleteBookList = (req, res) => {
       );
     },
     callback => {
-      User.findOne({ googleId: googleId })
+      User.findOne({ email: email })
         .populate("booklists")
         .exec((err, result) => {
           if (!err) {
