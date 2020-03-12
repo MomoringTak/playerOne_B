@@ -5,7 +5,8 @@ import {
   googleSignIn,
   updateUser,
   wtbSignUp,
-  wtbSignIn
+  wtbSignIn,
+  deleteUser
 } from "../controllers/userController";
 import { checkToken } from "../secret/verify";
 
@@ -14,6 +15,7 @@ const userRouter = express.Router();
 userRouter.get(routes.userDetail, checkToken, getUser);
 userRouter.post(routes.googleSignIn, googleSignIn);
 userRouter.patch(routes.patchUser, updateUser);
+userRouter.delete(routes.deleteUser, deleteUser);
 userRouter.post(routes.wtbSignIn, wtbSignIn);
 userRouter.post(routes.wtbSignUp, wtbSignUp);
 

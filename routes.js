@@ -24,6 +24,9 @@ const USER_LOGIN = "/login";
 const WTB_SIGNUP = "/signup";
 
 const WTB_SIGNIN = "/signin";
+
+const DELETE_USER = "/delete/:id";
+
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -112,6 +115,7 @@ const routes = {
   googleSignIn: GOOGLE_SIGNIN,
   wtbSignUp: WTB_SIGNUP,
   wtbSignIn: WTB_SIGNIN,
+  deleteUser: DELETE_USER,
   books: BOOK,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,
