@@ -28,18 +28,14 @@ const CommentSchema = new Schema({
     ref: "User",
     required: true
   },
-  book: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Book"
-    }
-  ],
-  booklist: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "BookLst"
-    }
-  ],
+  book: {
+    type: Schema.Types.ObjectId,
+    ref: "Book"
+  },
+  booklist: {
+    type: Schema.Types.ObjectId,
+    ref: "BookLst"
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,

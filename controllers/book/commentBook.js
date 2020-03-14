@@ -2,7 +2,6 @@ import Comment from "../../models/Comment";
 
 const commentBook = async (req, res) => {
   const { body: comment } = req;
-  console.log(comment);
   try {
     const commentResult = await Comment.create(comment);
     res.status(200).json({ success: true, msg: "성공", commentResult });

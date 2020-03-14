@@ -6,7 +6,8 @@ import {
   updateUser,
   wtbSignUp,
   wtbSignIn,
-  deleteUser
+  deleteUser,
+  userComment
 } from "../controllers/userController";
 import { checkToken } from "../secret/verify";
 
@@ -18,6 +19,7 @@ userRouter.patch(routes.patchUser, updateUser);
 userRouter.delete(routes.deleteUser, deleteUser);
 userRouter.post(routes.wtbSignIn, wtbSignIn);
 userRouter.post(routes.wtbSignUp, wtbSignUp);
+userRouter.get(routes.userComment, userComment);
 
 //Need to be Refactored
 userRouter.post("/check", checkToken, function(req, res, next) {
