@@ -4,66 +4,36 @@ import User from "../../models/User";
 
 import async from "async";
 
-const uploadBooklist = (req, res) => {
+const uploadBooklist = async (req, res) => {
   const {
     body: { userId }
   } = req;
+
   const dt = new Date();
   const newBookList = req.body;
   newBookList.createdAt = dt;
   newBookList.updatedAt = dt;
 
-  let bookListCreateResult;
-  let bookUpdateResult;
-  let userUpdateResult;
-
-  const Tasks = [
-    callback => {
-      BookList.create(newBookList, (err, result) => {
-        if (!err) {
-          bookListCreateResult = result;
-          callback(null);
-        } else callback(err);
-      });
-    },
-    callback => {
-      Book.updateMany(
-        { _id: { $in: bookListCreateResult.books } },
-        { $push: { booklists: bookListCreateResult._id } },
-        (err, result) => {
-          if (!err) {
-            bookUpdateResult = result;
-            callback(null);
-          } else callback(err);
-        }
-      );
-    },
-    callback => {
-      User.update(
-        { _id: { $in: userId } },
-        { $push: { booklists: bookListCreateResult._id } },
-        (err, result) => {
-          if (!err) {
-            userUpdateResult = result;
-            callback(null);
-          } else callback(err);
-        }
-      );
-    }
-  ];
-
-  async.series(Tasks, (err, results) => {
-    if (err != null) res.status(400).json({ success: false, msg: err });
-    else {
-      res.status(200).json({
-        success: true,
-        msg: "Success",
-        bookList: bookListCreateResult,
-        result: bookUpdateResult,
-        user: userUpdateResult
-      });
-    }
-  });
+  try {
+    const bookListCreateResult = await BookList.create(newBookList);
+    const bookUpdateResult = await Book.updateMany(
+      { _id: { $in: bookListCreateResult.books } },
+      { $push: { booklists: bookListCreateResult._id } }
+    );
+    const userUpdateResult = await User.update(
+      { _id: { $in: userId } },
+      { $push: { booklists: bookListCreateResult._id } }
+    );
+    res.status(200).json({
+      success: true,
+      msg: "Success",
+      bookList: bookListCreateResult,
+      result: bookUpdateResult,
+      user: userUpdateResult
+    });
+  } catch (err) {
+    res.status(400).json({ success: false, msg: err });
+  }
 };
 
 export default uploadBooklist;

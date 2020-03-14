@@ -1,12 +1,12 @@
 import User from "../../models/User";
 
-const getBooklist = (req, res) => {
+const getBooklist = async (req, res) => {
   const {
     query: { email }
   } = req;
 
-  User.findOne({ email: email })
-    .populate({
+  try {
+    const booklist = await User.findOne({ email: email }).populate({
       path: "booklists",
       model: "BookList",
       populate: {
@@ -14,14 +14,11 @@ const getBooklist = (req, res) => {
         model: "Book",
         select: ["image", "title", "author", "publisher"]
       }
-    })
-    .exec((err, booklist) => {
-      if (!err) {
-        res.status(200).json({ success: true, msg: "성공", booklist });
-      } else {
-        res.status(400).json({ success: false, msg: err });
-      }
     });
+    res.status(200).json({ success: true, msg: "성공", booklist });
+  } catch (err) {
+    res.status(400).json({ success: false, msg: err });
+  }
 };
 
 export default getBooklist;

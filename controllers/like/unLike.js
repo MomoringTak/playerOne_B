@@ -1,5 +1,5 @@
 import Like from "../../models/Like";
 
-const unLike = (req, res) => {};
+const unLike = async (req, res) => {};
 
 export default unLike;

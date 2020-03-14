@@ -12,15 +12,6 @@ const deleteComment = async (req, res) => {
   } catch (err) {
     res.status(400).json({ success: false, msg: err });
   }
-  // Comment.find({ book: bookId })
-  //   .populate("user")
-  //   .exec((err, commentResult) => {
-  //     if (!err) {
-  //       res.status(200).json({ success: true, msg: "성공", commentResult });
-  //     } else {
-  //       res.status(400).json({ success: false, msg: err });
-  //     }
-  //   });
 };
 
 export default deleteComment;
