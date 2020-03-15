@@ -9,13 +9,16 @@ const BookListSchema = new Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    required: "Booklist description is required"
   },
   createdAt: {
-    type: Date
+    type: Date,
+    default: Date.now
   },
   updatedAt: {
-    type: Date
+    type: Date,
+    default: Date.now
   },
   books: [
     {

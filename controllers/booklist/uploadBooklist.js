@@ -9,10 +9,11 @@ const uploadBooklist = async (req, res) => {
     body: { userId }
   } = req;
 
-  const dt = new Date();
-  const newBookList = req.body;
-  newBookList.createdAt = dt;
-  newBookList.updatedAt = dt;
+  const { body: newBookList } = req;
+
+  // const dt = new Date();
+  // newBookList.createdAt = dt;
+  // newBookList.updatedAt = dt;
 
   try {
     const bookListCreateResult = await BookList.create(newBookList);
