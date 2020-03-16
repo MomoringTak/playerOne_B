@@ -9,26 +9,34 @@ const ReadLoggerSchema = new Schema({
     type: String
   },
   age: {
-    type: Number,
-    required: true
+    type: Number
+    // required: true
   },
   gender: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   time: {
-    type: Number,
-    required: true
+    type: Number
+    // required: true
   },
   difficulty: {
-    type: Number,
-    required: true
+    type: Number
+    // required: true
   },
-  books: {
+  wish: {
+    type: Boolean,
+    default: true
+  },
+  doneReading: {
+    type: Boolean,
+    default: true
+  },
+  book: {
     type: Schema.Types.ObjectId,
     ref: "Book"
   },
-  users: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }

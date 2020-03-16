@@ -5,7 +5,6 @@ const userComment = async (req, res) => {
     params: { id }
   } = req;
 
-  console.log(id);
   //The Data which must be displayed on UserProfile
   /*
     

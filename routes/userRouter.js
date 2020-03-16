@@ -10,6 +10,11 @@ import {
   userComment
 } from "../controllers/userController";
 import { checkToken } from "../secret/verify";
+import {
+  recordRead,
+  getReadLogger,
+  handleDoneRead
+} from "../controllers/readLoggerController";
 
 const userRouter = express.Router();
 
@@ -20,6 +25,9 @@ userRouter.delete(routes.deleteUser, deleteUser);
 userRouter.post(routes.wtbSignIn, wtbSignIn);
 userRouter.post(routes.wtbSignUp, wtbSignUp);
 userRouter.get(routes.userComment, userComment);
+userRouter.post(routes.userWishlist, recordRead);
+userRouter.post(routes.userRead, handleDoneRead);
+userRouter.post(routes.getReadLogger, getReadLogger);
 
 //Need to be Refactored
 userRouter.post("/check", checkToken, function(req, res, next) {

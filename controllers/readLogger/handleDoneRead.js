@@ -1,11 +1,12 @@
 import ReadLogger from "../../models/ReadLogger";
 
-const recordLogger = async (req, res) => {
+const handleDoneRead = async (req, res) => {
   const { body: logData } = req;
+
   try {
     const logExist = await ReadLogger.findOneAndUpdate(
       { user: logData.user, book: logData.book },
-      { wish: logData.wish }
+      { doneReading: logData.doneReading, wish: false }
     );
 
     if (logExist === null) {
@@ -18,4 +19,4 @@ const recordLogger = async (req, res) => {
   }
 };
 
-export default recordLogger;
+export default handleDoneRead;

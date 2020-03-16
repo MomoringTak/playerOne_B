@@ -29,6 +29,12 @@ const DELETE_USER = "/delete/:id";
 
 const USER_COMMENT = "/comment/:id";
 
+const USER_WISHLIST = "/wishlist";
+
+const USER_READ = "/doneRead";
+
+const GET_READLOGGER = "/readLogger";
+
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -119,6 +125,9 @@ const routes = {
   wtbSignIn: WTB_SIGNIN,
   deleteUser: DELETE_USER,
   userComment: USER_COMMENT,
+  userRead: USER_READ,
+  userWishlist: USER_WISHLIST,
+  getReadLogger: GET_READLOGGER,
   books: BOOK,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,

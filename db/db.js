@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const url = "mongodb://localhost:27017/wtb";
 mongoose.connect(url, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 const db = mongoose.connection;
