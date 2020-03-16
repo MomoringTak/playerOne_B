@@ -5,9 +5,9 @@ import {
   uploadBooklist,
   getBooklist,
   getOneBooklist,
-  searchBook,
   deleteBooklist,
-  getBooklistDetail
+  getBooklistDetail,
+  searchBook
 } from "../controllers/booklistController";
 import { checkToken } from "../secret/verify";
 

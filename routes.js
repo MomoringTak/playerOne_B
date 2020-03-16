@@ -112,6 +112,9 @@ const BOOK_COMMENT = "/:id";
 //해당 유저가 남긴 댓글을 삭제하는 API.
 const DELETE_COMMENT = "/delete";
 
+const SEARCH_ROOT = "/search";
+const SEARCH = "/";
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const routes = {
@@ -144,7 +147,9 @@ const routes = {
   searchBook: SEARCH_BOOK,
   comments: COMMENTS,
   bookComment: BOOK_COMMENT,
-  deleteComment: DELETE_COMMENT
+  deleteComment: DELETE_COMMENT,
+  searchRoot: SEARCH_ROOT,
+  search: SEARCH
 };
 
 export default routes;

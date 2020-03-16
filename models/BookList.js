@@ -6,11 +6,13 @@ const Schema = mongoose.Schema;
 const BookListSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   description: {
     type: String,
-    required: "Booklist description is required"
+    required: "Booklist description is required",
+    text: true
   },
   createdAt: {
     type: Date,
