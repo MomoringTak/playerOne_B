@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 const BookSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   image: {
     type: String,
@@ -15,11 +16,13 @@ const BookSchema = new Schema({
   },
   author: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   publisher: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   pubdate: {
     type: Date,
@@ -32,10 +35,12 @@ const BookSchema = new Schema({
   },
   description: {
     type: String,
-    required: true
+    required: true,
+    text: true
   },
   keyword: {
-    type: String
+    type: String,
+    text: true
   },
   genre: {
     category: []
