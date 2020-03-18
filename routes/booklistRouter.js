@@ -7,7 +7,8 @@ import {
   getOneBooklist,
   deleteBooklist,
   getBooklistDetail,
-  searchBook
+  searchBook,
+  getAllReadLog
 } from "../controllers/booklistController";
 import { checkToken } from "../secret/verify";
 
@@ -35,5 +36,7 @@ booklistRouter.get(routes.searchBook, searchBook);
 //deleteBookList In Booklist
 //선택된 BookList 삭제.
 booklistRouter.delete(routes.deleteBookList, deleteBooklist);
+
+booklistRouter.post(routes.getAllReadLog, getAllReadLog);
 
 export default booklistRouter;

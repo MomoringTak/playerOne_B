@@ -95,6 +95,8 @@ const GET_ONE_BOOKLIST = "/item:/:id";
 // 북리스트 생성 시 추가 할 책들 검색 API : OpenAPI 검색과 달리 DB 에 저장 된 부분들만 검색.
 const SEARCH_BOOK = "/:title";
 
+const GET_ALL_READLOG = "/getAllReadLog";
+
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -144,6 +146,7 @@ const routes = {
   uploadBooklist: UPLOAD_BOOKLIST,
   deleteBookList: DELETE_BOOKLIST,
   getOneBooklist: GET_ONE_BOOKLIST,
+  getAllReadLog: GET_ALL_READLOG,
   searchBook: SEARCH_BOOK,
   comments: COMMENTS,
   bookComment: BOOK_COMMENT,

@@ -9,7 +9,6 @@ const getReadLogger = async (req, res) => {
       book: logInfo.book
     });
 
-    console.log(logResult);
     res.status(200).json({ success: true, msg: "성공", logResult });
   } catch (err) {
     res.status(400).json({ success: false, msg: err });
