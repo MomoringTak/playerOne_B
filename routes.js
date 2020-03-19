@@ -37,6 +37,8 @@ const USER_READ = "/doneRead";
 
 const GET_READLOGGER = "/readLogger";
 
+const GET_ALLWISH = "/allWish/:id";
+
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -136,6 +138,7 @@ const routes = {
   userRead: USER_READ,
   userWishlist: USER_WISHLIST,
   getReadLogger: GET_READLOGGER,
+  getAllWish: GET_ALLWISH,
   books: BOOK,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,

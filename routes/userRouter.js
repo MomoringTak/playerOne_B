@@ -14,7 +14,8 @@ import { checkToken } from "../secret/verify";
 import {
   recordRead,
   getReadLogger,
-  handleDoneRead
+  handleDoneRead,
+  getAllWish
 } from "../controllers/readLoggerController";
 
 const userRouter = express.Router();
@@ -30,6 +31,7 @@ userRouter.get(routes.userComment, userComment);
 userRouter.post(routes.userWishlist, recordRead);
 userRouter.post(routes.userRead, handleDoneRead);
 userRouter.post(routes.getReadLogger, getReadLogger);
+userRouter.get(routes.getAllWish, getAllWish);
 
 //Need to be Refactored
 userRouter.post("/check", checkToken, function(req, res, next) {
