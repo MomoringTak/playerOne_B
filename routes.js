@@ -19,6 +19,8 @@ const PATCH_USER = "/update";
 //POST new User or Find
 const GOOGLE_SIGNIN = "/googleSignIn";
 
+const GOOGLE_DETAIL = "/googleDetail";
+
 const USER_LOGIN = "/login";
 
 const WTB_SIGNUP = "/signup";
@@ -126,6 +128,7 @@ const routes = {
   patchUser: PATCH_USER,
   userLogin: USER_LOGIN,
   googleSignIn: GOOGLE_SIGNIN,
+  googleDetail: GOOGLE_DETAIL,
   wtbSignUp: WTB_SIGNUP,
   wtbSignIn: WTB_SIGNIN,
   deleteUser: DELETE_USER,
