@@ -5,8 +5,6 @@ const getAllWish = async (req, res) => {
     params: { id: userId }
   } = req;
 
-  console.log(`userId: ${userId}`);
-  console.log(userId);
   try {
     const MyLogger = await ReadLogger.find({ user: userId }).populate({
       path: "book",
