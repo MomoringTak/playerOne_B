@@ -4,7 +4,6 @@ const getAllReadLog = async (req, res) => {
   const { body: logData } = req;
 
   try {
-    let wish = 0;
     let doneReading = 0;
 
     for (let item of logData) {
@@ -13,15 +12,12 @@ const getAllReadLog = async (req, res) => {
         user: item.user
       });
 
-      if (logDataResult.wish === true) {
-        wish++;
-      } else if (logDataResult.doneReading === true) {
+      if (logDataResult.doneReading === true) {
         doneReading++;
       }
     }
 
     const Scores = {
-      wish,
       doneReading
     };
 
