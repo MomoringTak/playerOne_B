@@ -1,5 +1,6 @@
 import Book from "../../models/Book";
 import ReadLogger from "../../models/ReadLogger";
+import User from "../../models/User";
 
 //수정 매우 필요.
 const uploadBook = async (req, res) => {
@@ -14,6 +15,9 @@ const uploadBook = async (req, res) => {
     // for (let item of newBookResult) {
     //   item.user = user;
     // }
+
+    const newbieUpdate = await User.findByIdAndUpdate(user, { newbie: false });
+
     const newLogger = newBookResult.map(item => {
       const logger = {
         book: item._id,

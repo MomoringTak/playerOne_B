@@ -21,6 +21,10 @@ const UserSchema = new Schema({
   gender: {
     type: String
   },
+  newbie: {
+    type: Boolean,
+    default: true
+  },
   booklists: [
     {
       type: Schema.Types.ObjectId,

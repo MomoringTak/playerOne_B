@@ -9,11 +9,16 @@ const wtbSignIn = async (req, res) => {
   const { body: user } = req;
 
   try {
-    const result = await User.find({ email: email, password: password });
+    const userResult = await User.find({ email: email, password: password });
     if (result.length >= 1)
       res
         .status(201)
-        .send({ success: true, msg: "성공", id_token: createToken(user) });
+        .send({
+          success: true,
+          msg: "성공",
+          id_token: createToken(user),
+          userResult
+        });
     else {
       res.status(400).json({
         success: false,

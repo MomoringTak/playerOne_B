@@ -9,14 +9,17 @@ const googleSignIn = async (req, res) => {
   const { body: user } = req;
 
   try {
-    await User.findOrCreate(
+    const userResult = await User.findOrCreate(
       { googleId: googleId },
       { nickname: name, email: email }
     );
 
-    res
-      .status(200)
-      .json({ success: true, msg: "Success", id_token: createToken(user) });
+    res.status(200).json({
+      success: true,
+      msg: "Success",
+      id_token: createToken(user),
+      userResult
+    });
   } catch (err) {
     res.status(400).json({ success: false, msg: err });
   }
