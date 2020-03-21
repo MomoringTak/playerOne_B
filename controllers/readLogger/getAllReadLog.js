@@ -2,7 +2,7 @@ import ReadLogger from "../../models/ReadLogger";
 
 const getAllReadLog = async (req, res) => {
   const { body: logData } = req;
-
+  let Scores;
   try {
     let doneReading = 0;
 
@@ -17,7 +17,7 @@ const getAllReadLog = async (req, res) => {
       }
     }
 
-    const Scores = {
+    Scores = {
       doneReading
     };
 
