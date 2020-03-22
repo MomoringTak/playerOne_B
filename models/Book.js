@@ -42,8 +42,9 @@ const BookSchema = new Schema({
     type: String,
     text: true
   },
-  genre: {
-    category: []
+  category: {
+    type: String,
+    text: true
   },
   views: {
     type: Number,
