@@ -10,6 +10,7 @@ import {
   getBookDetail,
   addToBooklist
 } from "../controllers/bookController";
+import { getBookWish } from "../controllers/readLoggerController";
 
 const bookRouter = express.Router();
 
@@ -34,5 +35,7 @@ bookRouter.post(routes.uploadBook, uploadBook);
 bookRouter.post(routes.commentBook, commentBook);
 
 bookRouter.post(routes.addToBooklist, addToBooklist);
+
+bookRouter.get(routes.bookWish, getBookWish);
 
 export default bookRouter;

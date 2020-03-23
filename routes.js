@@ -68,6 +68,10 @@ const GET_BOOK_DETAIL = "/:id";
 //댓글모델에 해당 책 및 작성자 저장 API
 const COMMENT_BOOK = "/comment";
 
+//getBookWish
+//1책의 위시 수 갯수
+const BOOK_WISH = "/wish/user/:id";
+
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -146,6 +150,7 @@ const routes = {
   addToBooklist: ADD_BOOK_TO_BOOKLIST,
   getBookDetail: GET_BOOK_DETAIL,
   commentBook: COMMENT_BOOK,
+  bookWish: BOOK_WISH,
   booklists: BOOKLISTS,
   getBooklist: GET_BOOKLIST,
   getBooklistDetail: GET_BOOKLIST_DETAIL,
