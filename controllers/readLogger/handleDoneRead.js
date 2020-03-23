@@ -5,7 +5,12 @@ const handleDoneRead = async (req, res) => {
   try {
     const logExist = await ReadLogger.findOneAndUpdate(
       { user: logData.user, book: logData.book },
-      { doneReading: logData.doneReading, wish: false }
+      {
+        doneReading: logData.doneReading,
+        wish: false,
+        difficulty: logData.difficulty,
+        time: logData.time
+      }
     );
 
     if (logExist === null) {
