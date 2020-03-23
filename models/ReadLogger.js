@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const ReadLoggerSchema = new Schema({
-  genre: {
+  category: {
     type: String
   },
   age: {

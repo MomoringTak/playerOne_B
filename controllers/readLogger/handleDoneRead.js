@@ -2,7 +2,6 @@ import ReadLogger from "../../models/ReadLogger";
 
 const handleDoneRead = async (req, res) => {
   const { body: logData } = req;
-
   try {
     const logExist = await ReadLogger.findOneAndUpdate(
       { user: logData.user, book: logData.book },
