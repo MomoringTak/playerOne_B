@@ -46,6 +46,12 @@ const BookSchema = new Schema({
     type: String,
     text: true
   },
+  difficulty: {
+    type: Number
+  },
+  time: {
+    type: String
+  },
   views: {
     type: Number,
     default: 0

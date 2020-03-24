@@ -8,6 +8,7 @@ const uploadBook = async (req, res) => {
     body: { newBook: books, user }
   } = req;
 
+  console.log(books);
   // console.log(user);
 
   try {
@@ -22,7 +23,9 @@ const uploadBook = async (req, res) => {
       const logger = {
         book: item._id,
         user: user,
-        wish: false
+        wish: false,
+        difficulty: item.difficulty,
+        time: item.time
       };
       return logger;
     });
@@ -31,6 +34,7 @@ const uploadBook = async (req, res) => {
 
     res.status(200).send({ success: true, msg: "성공", newBookResult });
   } catch (err) {
+    console.log(err);
     res.status(400).send({ success: false, msg: err });
   }
 
