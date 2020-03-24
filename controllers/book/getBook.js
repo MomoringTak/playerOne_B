@@ -50,9 +50,14 @@ const getCategory = async URL => {
 };
 
 const addGenre = async books => {
-  for (let book of books) {
-    book.category = await getCategory(book.link);
-  }
+  const arrayPromises = books.map(item => getCategory(item.link));
+  await Promise.all(arrayPromises).then( categories => {
+    let i = 0;
+    for( let book of books) {
+      book.category = categories[i];
+      i++;
+    }
+  });
 
   return books;
 };
