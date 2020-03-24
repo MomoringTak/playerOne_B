@@ -7,7 +7,6 @@ const handleDoneRead = async (req, res) => {
       { user: logData.user, book: logData.book },
       {
         doneReading: logData.doneReading,
-        wish: false,
         difficulty: logData.difficulty,
         time: logData.time
       }
