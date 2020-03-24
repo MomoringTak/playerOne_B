@@ -8,7 +8,8 @@ import {
   deleteBooklist,
   getBooklistDetail,
   searchBook,
-  getAllReadLog
+  getAllReadLog,
+  getAllBooklist
 } from "../controllers/booklistController";
 import { checkToken } from "../secret/verify";
 
@@ -38,5 +39,7 @@ booklistRouter.get(routes.searchBook, searchBook);
 booklistRouter.delete(routes.deleteBookList, deleteBooklist);
 
 booklistRouter.post(routes.getAllReadLog, getAllReadLog);
+
+booklistRouter.get(routes.getAllBooklist, getAllBooklist);
 
 export default booklistRouter;

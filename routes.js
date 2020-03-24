@@ -105,6 +105,8 @@ const SEARCH_BOOK = "/:title";
 
 const GET_ALL_READLOG = "/getAllReadLog";
 
+const ALL_BOOKLIST = "/getAllBooklist/open";
+
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///  \_O.O_/  ======  OTL
@@ -157,6 +159,7 @@ const routes = {
   uploadBooklist: UPLOAD_BOOKLIST,
   deleteBookList: DELETE_BOOKLIST,
   getOneBooklist: GET_ONE_BOOKLIST,
+  getAllBooklist: ALL_BOOKLIST,
   getAllReadLog: GET_ALL_READLOG,
   searchBook: SEARCH_BOOK,
   comments: COMMENTS,
