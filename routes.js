@@ -104,7 +104,6 @@ const GET_ONE_BOOKLIST = "/item:/:id";
 const SEARCH_BOOK = "/:title";
 
 const GET_ALL_READLOG = "/getAllReadLog";
-
 const ALL_BOOKLIST = "/getAllBooklist";
 
 ///  \_O.O_/  ======  OTL
