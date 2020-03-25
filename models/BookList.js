@@ -27,7 +27,11 @@ const BookListSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Book"
     }
-  ]
+  ],
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 const BookList = mongoose.model("BookList", BookListSchema);
