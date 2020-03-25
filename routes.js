@@ -105,7 +105,7 @@ const SEARCH_BOOK = "/:title";
 
 const GET_ALL_READLOG = "/getAllReadLog";
 
-const ALL_BOOKLIST = "/getAllBooklist/open";
+const ALL_BOOKLIST = "/getAllBooklist";
 
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
