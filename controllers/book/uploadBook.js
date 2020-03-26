@@ -8,9 +8,6 @@ const uploadBook = async (req, res) => {
     body: { newBook: books, user }
   } = req;
 
-  console.log(books);
-  // console.log(user);
-
   try {
     const newBookResult = await Book.create(books);
     // for (let item of newBookResult) {
