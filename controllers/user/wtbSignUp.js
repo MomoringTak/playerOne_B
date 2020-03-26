@@ -10,14 +10,13 @@ const wtbSignUp = async (req, res) => {
 
   try {
     const userResult = await User.findOrCreate({ email: email }, userInfo);
-    res
-      .status(200)
-      .json({
-        success: true,
-        msg: "성공",
-        id_token: createToken(userInfo),
-        userResult
-      });
+    console.log(userResult);
+    res.status(200).json({
+      success: true,
+      msg: "성공",
+      id_token: createToken(userInfo),
+      userResult
+    });
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: false, msg: err });
