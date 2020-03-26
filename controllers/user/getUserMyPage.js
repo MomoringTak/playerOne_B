@@ -25,8 +25,6 @@ const getUserMyPage = async (req, res) => {
     const wishData = MyLogger.filter(data => data.wish === true);
     const readData = MyLogger.filter(data => data.doneReading === true);
 
-    console.log(readData);
-
     res.status(200).json({
       success: true,
       msg: "성공",
@@ -35,7 +33,6 @@ const getUserMyPage = async (req, res) => {
       readData
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ success: false, msg: err });
   }
 };
