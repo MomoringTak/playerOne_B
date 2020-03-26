@@ -5,4 +5,4 @@ export { default as getUser } from "./user/getUser";
 export { default as wtbSignIn } from "./user/wtbSignIn";
 export { default as wtbSignUp } from "./user/wtbSignUp";
 export { default as deleteUser } from "./user/deleteUser";
-export { default as userComment } from "./user/userComment";
+export { default as getUserMyPage } from "./user/getUserMyPage";

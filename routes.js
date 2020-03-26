@@ -29,15 +29,13 @@ const WTB_SIGNIN = "/signin";
 
 const DELETE_USER = "/delete/:id";
 
-const USER_COMMENT = "/comment/:id";
-
 const USER_WISHLIST = "/wishlist";
 
 const USER_READ = "/doneRead";
 
 const GET_READLOGGER = "/readLogger";
 
-const GET_ALLWISH = "/allWish/:id";
+const GET_USER_MY_PAGE = "/getUserMyPage/:id";
 
 ///  \_O.O_/  ======  OTL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,11 +137,10 @@ const routes = {
   wtbSignUp: WTB_SIGNUP,
   wtbSignIn: WTB_SIGNIN,
   deleteUser: DELETE_USER,
-  userComment: USER_COMMENT,
   userRead: USER_READ,
   userWishlist: USER_WISHLIST,
   getReadLogger: GET_READLOGGER,
-  getAllWish: GET_ALLWISH,
+  getUserMyPage: GET_USER_MY_PAGE,
   books: BOOK,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,

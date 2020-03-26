@@ -8,7 +8,8 @@ import {
   wtbSignIn,
   deleteUser,
   userComment,
-  updateGoogleUser
+  updateGoogleUser,
+  getUserMyPage
 } from "../controllers/userController";
 import { checkToken } from "../secret/verify";
 import {
@@ -27,11 +28,11 @@ userRouter.patch(routes.patchUser, updateUser);
 userRouter.delete(routes.deleteUser, deleteUser);
 userRouter.post(routes.wtbSignIn, wtbSignIn);
 userRouter.post(routes.wtbSignUp, wtbSignUp);
-userRouter.get(routes.userComment, userComment);
 userRouter.post(routes.userWishlist, recordRead);
 userRouter.post(routes.userRead, handleDoneRead);
 userRouter.post(routes.getReadLogger, getReadLogger);
-userRouter.get(routes.getAllWish, getAllWish);
+
+userRouter.get(routes.getUserMyPage, getUserMyPage);
 
 //Need to be Refactored
 userRouter.post("/check", checkToken, function(req, res, next) {
