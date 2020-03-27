@@ -1,6 +1,7 @@
 //Read Logger Model
 
 import mongoose from "mongoose";
+import findOrCreate from "mongoose-findorcreate";
 
 const Schema = mongoose.Schema;
 
@@ -41,6 +42,8 @@ const ReadLoggerSchema = new Schema({
     ref: "User"
   }
 });
+
+ReadLoggerSchema.plugin(findOrCreate);
 
 const ReadLogger = mongoose.model("ReadLogger", ReadLoggerSchema);
 
