@@ -66,7 +66,9 @@ const getBookWish = async (req, res) => {
       wishNumber: wishNum.length,
       readNumber: readNum.length,
       maxTime,
-      maxDifficulty
+      maxDifficulty,
+      averageTime,
+      averageDifficulty
     });
   } catch (err) {
     console.log(err);
