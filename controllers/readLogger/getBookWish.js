@@ -6,9 +6,17 @@ const getBookWish = async (req, res) => {
   } = req;
 
   try {
-    const wishResult = await ReadLogger.find({ book: bookId, wish: true });
-    const wishNumber = wishResult.length;
-    res.status(200).json({ success: true, msg: "성공", wishNumber });
+    const countBookStatus = await ReadLogger.find({ book: bookId });
+
+    const readNum = countBookStatus.filter(item => item.doneReading === true);
+    const wishNum = countBookStatus.filter(item => item.wish === true);
+
+    res.status(200).json({
+      success: true,
+      msg: "성공",
+      wishNumber: wishNum.length,
+      readNumber: readNum.length
+    });
   } catch (err) {
     res.status(400).json({ success: false, msg: err });
   }
