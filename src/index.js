@@ -11,13 +11,15 @@ import http from "http";
 
 dotenv.config();
 
+const PORT = process.env.PORT || 8008;
+
 //어떻게 변경해야될지 찾는중... two parantheses in require
 const debug = require("debug")("server:server");
 
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort(process.env.PORT || "8008");
+const port = normalizePort(PORT);
 app.set("port", port);
 
 /**

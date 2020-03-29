@@ -14,8 +14,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 /**
  * Module dependencies.
  */
-_dotenv["default"].config(); //어떻게 변경해야될지 찾는중... two parantheses in require
+_dotenv["default"].config();
 
+var PORT = process.env.PORT || 8008; //어떻게 변경해야될지 찾는중... two parantheses in require
 
 var debug = require("debug")("server:server");
 /**
@@ -23,7 +24,7 @@ var debug = require("debug")("server:server");
  */
 
 
-var port = normalizePort(process.env.PORT || "8008");
+var port = normalizePort(PORT);
 
 _app["default"].set("port", port);
 /**
