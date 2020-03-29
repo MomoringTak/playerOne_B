@@ -1,5 +1,5 @@
+import "@babel/polyfill";
 import express from "express";
-
 import db from "./db/db";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";

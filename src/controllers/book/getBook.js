@@ -1,5 +1,8 @@
 import axios from "axios";
 import cheerio from "cheerio";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const UNDEFINED = "undefined";
 
@@ -7,8 +10,8 @@ const UNDEFINED = "undefined";
 const api = axios.create({
   baseURL: "https://openapi.naver.com/v1/search/book_adv.json",
   headers: {
-    "X-Naver-Client-id": "6H7Ziz2RYe9uqckrEwAW",
-    "X-Naver-Client-Secret": "Q_8KZebCX7"
+    "X-Naver-Client-id": process.env.NAVER_CLIENTID,
+    "X-Naver-Client-Secret": process.env.NAVER_SECRET
   }
 });
 
@@ -51,9 +54,9 @@ const getCategory = async URL => {
 
 const addGenre = async books => {
   const arrayPromises = books.map(item => getCategory(item.link));
-  await Promise.all(arrayPromises).then( categories => {
+  await Promise.all(arrayPromises).then(categories => {
     let i = 0;
-    for( let book of books) {
+    for (let book of books) {
       book.category = categories[i];
       i++;
     }

@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+//process.env.PROUDCTION ? process.env.MONGO_URL : url
+
+// console.log(process.env.MONGO_URL);
 
 const url = "mongodb://localhost:27017/wtb";
-mongoose.connect(url, {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false

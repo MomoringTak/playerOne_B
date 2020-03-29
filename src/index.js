@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import "@babel/polyfill";
+import dotenv from "dotenv";
 
 /**
  * Module dependencies.
@@ -6,6 +8,8 @@
 
 import app from "./app";
 import http from "http";
+
+dotenv.config();
 
 //어떻게 변경해야될지 찾는중... two parantheses in require
 const debug = require("debug")("server:server");
