@@ -5,7 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-require("@babel/polyfill");
+require("core-js/stable");
+
+require("regenerator-runtime/runtime");
 
 var _express = _interopRequireDefault(require("express"));
 
