@@ -6,7 +6,7 @@
   "scripts": {
     "dev:server": "nodemon --exec babel-node src/index.js --delay 2",
     "build:server": "babel src --out-dir build",
-    "build": "npm run build:server && SET NODE_ENV=production",
+    "build": "npm run build:server",
     "prebuild": "rm -rf build",
     "start": "node build/index.js",
     "prestart": "npm run build"
