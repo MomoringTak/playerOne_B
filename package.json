@@ -22,6 +22,11 @@
   },
   "homepage": "https://github.com/bochipachibuchi/playerOne_B#readme",
   "dependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/polyfill": "^7.8.7",
     "@babel/runtime": "^7.7.7",
     "async": "^3.2.0",
     "axios": "^0.18.0",
@@ -44,11 +49,6 @@
     "regenerator-runtime": "^0.13.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.7",
-    "@babel/core": "^7.9.0",
-    "@babel/node": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/polyfill": "^7.8.7",
     "nodemon": "^2.0.2"
   }
 }
