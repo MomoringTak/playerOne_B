@@ -120,7 +120,7 @@ const BOOK_COMMENT = "/:id";
 //deleteComment
 //해당 유저가 남긴 댓글을 삭제하는 API.
 const DELETE_COMMENT = "/delete";
-
+const DELETE_PROFILE_COMMENT = "/profileComment";
 const SEARCH_ROOT = "/search";
 const SEARCH = "/";
 
@@ -161,6 +161,7 @@ const routes = {
   comments: COMMENTS,
   bookComment: BOOK_COMMENT,
   deleteComment: DELETE_COMMENT,
+  deleteProfileComment: DELETE_PROFILE_COMMENT,
   searchRoot: SEARCH_ROOT,
   search: SEARCH
 };

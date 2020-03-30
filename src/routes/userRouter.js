@@ -18,6 +18,7 @@ import {
   handleDoneRead,
   getAllWish
 } from "../controllers/readLoggerController";
+import { deleteCommentProfile } from "../controllers/commentController";
 
 const userRouter = express.Router();
 
@@ -33,6 +34,8 @@ userRouter.post(routes.userRead, handleDoneRead);
 userRouter.post(routes.getReadLogger, getReadLogger);
 
 userRouter.get(routes.getUserMyPage, getUserMyPage);
+
+userRouter.post(routes.deleteProfileComment, deleteCommentProfile);
 
 //Need to be Refactored
 userRouter.post("/check", checkToken, function(req, res, next) {

@@ -90,6 +90,7 @@ var BOOK_COMMENT = "/:id"; //프단 수정
 //해당 유저가 남긴 댓글을 삭제하는 API.
 
 var DELETE_COMMENT = "/delete";
+var DELETE_PROFILE_COMMENT = "/profileComment";
 var SEARCH_ROOT = "/search";
 var SEARCH = "/"; //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -128,6 +129,7 @@ var routes = {
   comments: COMMENTS,
   bookComment: BOOK_COMMENT,
   deleteComment: DELETE_COMMENT,
+  deleteProfileComment: DELETE_PROFILE_COMMENT,
   searchRoot: SEARCH_ROOT,
   search: SEARCH
 };

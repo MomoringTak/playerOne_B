@@ -15,6 +15,8 @@ var _verify = require("../secret/verify");
 
 var _readLoggerController = require("../controllers/readLoggerController");
 
+var _commentController = require("../controllers/commentController");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var userRouter = _express["default"].Router();
@@ -29,7 +31,8 @@ userRouter.post(_routes["default"].wtbSignUp, _userController.wtbSignUp);
 userRouter.post(_routes["default"].userWishlist, _readLoggerController.recordRead);
 userRouter.post(_routes["default"].userRead, _readLoggerController.handleDoneRead);
 userRouter.post(_routes["default"].getReadLogger, _readLoggerController.getReadLogger);
-userRouter.get(_routes["default"].getUserMyPage, _userController.getUserMyPage); //Need to be Refactored
+userRouter.get(_routes["default"].getUserMyPage, _userController.getUserMyPage);
+userRouter.post(_routes["default"].deleteProfileComment, _commentController.deleteCommentProfile); //Need to be Refactored
 
 userRouter.post("/check", _verify.checkToken, function (req, res, next) {
   res.status(200).json(req.user);
