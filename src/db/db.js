@@ -8,7 +8,7 @@ dotenv.config();
 // console.log(process.env.MONGO_URL);
 
 //localhost REst API server
-// const url = "mongodb://localhost:27017/wtb";
+const url = "mongodb://localhost:27017/wtb";
 
 //heroku Rest API server
 //QA끝나시면 아래 mongoose.connect(url, ) 이부분 커멘트 처리하시고 아래 production 커멘트 푸시면 됩니다... ㅎㅎㅎ
@@ -23,8 +23,16 @@ mongoose.connect(process.env.MONGO_URL, {
 });
 
 const db = mongoose.connection;
+// db.once("open", _ => {
+//   console.log("Database connected:", url);
+// });
+
+// db.on("error", err => {
+//   console.error("connection error:", err);
+// });
+
 db.once("open", _ => {
-  console.log("Database connected:", url);
+  console.log("Database connected:", process.env.MONGO_URL);
 });
 
 db.on("error", err => {
