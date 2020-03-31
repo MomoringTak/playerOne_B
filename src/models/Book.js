@@ -38,6 +38,10 @@ const BookSchema = new Schema({
     required: true,
     text: true
   },
+  link: {
+    type: String,
+    required: true
+  },
   keyword: {
     type: String,
     text: true

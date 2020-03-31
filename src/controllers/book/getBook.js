@@ -45,7 +45,7 @@ const getCategory = async URL => {
       return UNDEFINED;
     } else {
       let category = data.container.replace(/\t|\n|>/g, "").split(" ");
-      return category[0];
+      return category[0].trim();
     }
   } catch (err) {
     console.log(err);

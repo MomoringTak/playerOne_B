@@ -3,10 +3,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-//process.env.PROUDCTION ? process.env.MONGO_URL : url
-
-// console.log(process.env.MONGO_URL);
-
 //localhost REst API server
 const url = "mongodb://localhost:27017/wtb";
 
@@ -15,28 +11,27 @@ const url = "mongodb://localhost:27017/wtb";
 //production development 동시에 처리하는 방법 알아보다가.. 실패....
 
 //production용 REstAPI
-mongoose.connect(process.env.MONGO_URL, {
-  // mongoose.connect(url, {
+// mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
 });
 
 const db = mongoose.connection;
-// db.once("open", _ => {
-//   console.log("Database connected:", url);
-// });
-
-// db.on("error", err => {
-//   console.error("connection error:", err);
-// });
-
 db.once("open", _ => {
-  console.log("Database connected:", process.env.MONGO_URL);
+  console.log("Database connected:", url);
 });
+
+// db.once("open", _ => {
+//   console.log("Database connected:", process.env.MONGO_URL);
+// });
 
 db.on("error", err => {
   console.error("connection error:", err);
 });
 
 export default db;
+
+//process.env.PROUDCTION ? process.env.MONGO_URL : url
+// console.log(process.env.MONGO_URL);
