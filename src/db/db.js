@@ -11,8 +11,8 @@ const url = "mongodb://localhost:27017/wtb";
 //production development 동시에 처리하는 방법 알아보다가.. 실패....
 
 //production용 REstAPI
-// mongoose.connect(process.env.MONGO_URL, {
-mongoose.connect(url, {
+mongoose.connect(process.env.MONGO_URL, {
+  // mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
