@@ -74,9 +74,9 @@ const getBook = (req, res) => {
     try {
       const { data } = await getNaverBook(title, display);
 
-      const bookResult = await addGenre(data.items);
+      const bookResults = await addGenre(data.items);
 
-      res.status(200).json(bookResult);
+      res.status(200).json({ success: true, msg: "성공", bookResults });
     } catch (err) {
       res.status(400).json({ success: false, msg: err });
     }
