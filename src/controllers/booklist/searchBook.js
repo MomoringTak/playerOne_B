@@ -7,9 +7,9 @@ const searchBook = async (req, res) => {
 
   try {
     const books = await Book.find({ title: { $regex: title, $options: "i" } });
-    res.status(200).json({ sucess: true, msg: "성공", books });
+    res.status(200).json({ success: true, msg: "성공", books });
   } catch (err) {
-    res.status(400).json({ sucess: false, msg: err });
+    res.status(400).json({ success: false, msg: err });
   }
 };
 

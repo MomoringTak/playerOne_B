@@ -9,7 +9,7 @@ const getBookDetail = async (req, res) => {
     const book = await Book.findOne({ isbn: id });
     res.status(200).json({ book, success: true, msg: "성공" });
   } catch (err) {
-    res.status(400).json({ sucess: false, msg: err });
+    res.status(400).json({ success: false, msg: err });
   }
 };
 
