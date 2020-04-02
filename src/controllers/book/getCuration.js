@@ -9,8 +9,8 @@ const getCuration = async (req, res) => {
 
   /*
 1. 유저 나이대에 좋아요 제일 많은 탑 8 
-- 유저 나이 +- 10 살 찾기
-- 유저아이디 참조 리드로거 찾기
+- 유저 나이 기준 +- 5 살 찾기 예시) 25살 - 20살 ~ 30살 유저
+- 유저아이디 참조 모든 리드로거 찾기
 - 최근 1주일동안 읽은 처리된 책으로 찾기 
 - 좋아요 제일 많은거 출력 sorting 8개.
 
@@ -34,8 +34,9 @@ const getCuration = async (req, res) => {
 - Booklist에서 BookId가 제일 많이 포함되는 책 탑8
 
     */
+    const givenUser = User.findById(userId);
+    const ageTop = User.find.where('age').gt(givenUser.age - 5).lt(givenUser.age + 5);
     
-    const genderTop;
 
 
     const wishTop;

@@ -14,6 +14,7 @@ import bookRouter from "./routes/bookRouter";
 import booklistRouter from "./routes/booklistRouter";
 import commentRouter from "./routes/commentRouter";
 import searchRouter from "./routes/searchRouter";
+import createSeedData from "./controllers/admin/createSeedData";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(routes.books, bookRouter);
 app.use(routes.booklists, booklistRouter);
 app.use(routes.comments, commentRouter);
 app.use(routes.searchRoot, searchRouter);
+app.use("/admin/createSeed", createSeedData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
