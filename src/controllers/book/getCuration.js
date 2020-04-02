@@ -36,8 +36,11 @@ const getCuration = async (req, res) => {
 
     */
   try {
-    const id = "5e85ae55e1739f624c8cf293";
+    let ageTopLike = [];
+    const id = "5e862397d700d23844efda79";
     const givenUser = await User.findById(id);
+
+    //유저 나이 플마 5살 범위 검색
     const ageTop = await User.find()
       //   .where("id")
       //   .ne(givenUser_id)
@@ -46,31 +49,122 @@ const getCuration = async (req, res) => {
       .lte(givenUser.age + 5)
       .select("_id");
 
-    //같은 _id 값들 하나의 Array로 묶어서 반환.
-    //최선의 방법은 아님. 방법을 강구해야됨.
-    const leftOne = ({ _id, ...rest }) => _id;
+    //ageTop 유저아이디 객체배열 -> userCollection 배열에 짚어넢음
+    const userCollection = ageTop.map(item => item._id);
 
-    const userCollection = ageTop.map(item => leftOne(item));
-
+    //유저들이 가지고있는 리드로거 모델에서 wish가 true인 docs를 찝고 내림차순으로 정렬. limit은 2000개로제한.
     const ageAllLogger = await ReadLogger.find()
       .where("user")
       .equals({ $in: userCollection })
       .where("wish")
       .equals(true)
-      .select("book");
+      .select("book createdAt")
+      .sort({ createdAt: "desc" })
+      .limit(2000);
 
-    const bookCollection = ageAllLogger.map(item => leftOne(item));
+    //같은 책 중복제거 아이디만 가져옴.
+    const uniqueBook = await ReadLogger.find()
+      .where("user")
+      .equals({ $in: userCollection })
+      .where("wish")
+      .equals(true)
+      .select("book createdAt")
+      .sort({ createdAt: "desc" })
+      .distinct("book");
 
-    //   .sort({ createAt: "desc" })
-    //   .limit(8);
+    //라이크가 좋아요 && 나이 범위내인것들이 포함된 readlogger docs를 가져옴.
+    // const bookCollection = ageAllLogger.map(item => item.book);
 
-    //   .sort({ createAt: "desc" });
+    //각 책마다 가지고 있는 좋아요 수 종합
+    let countCollection = [];
+    for (let item of uniqueBook) {
+      const countVal = await ReadLogger.count()
+        .where("book")
+        .equals(item)
+        .where("wish")
+        .equals(true);
+
+      countCollection = [...countCollection, { book: item, wishNum: countVal }];
+    }
+
+    //카운트된 좋아요 내림차순으로 정렬
+    countCollection.sort((a, b) => {
+      return a.wishNum > b.wishNum ? -1 : a.wishNum < b.wishNum ? 1 : 0;
+    });
+
+    //탑 8개 책 아이디들 -> apteTopLike 배열에 추가
+    for (let i = 0; i < 8; i++) {
+      if (countCollection[i] !== undefined)
+        ageTopLike = [...ageTopLike, countCollection[i].book];
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    let ageTopRead = [];
+
+    //유저들이 가지고있는 리드로거 모델에서 wish가 true인 docs를 찝고 내림차순으로 정렬. limit은 2000개로제한.
+    const ageReadAllLogger = await ReadLogger.find()
+      .where("user")
+      .equals({ $in: userCollection })
+      .where("doneReading")
+      .equals(true)
+      .select("book createdAt")
+      .sort({ createdAt: "desc" })
+      .limit(2000);
+
+    //같은 책 중복제거 아이디만 가져옴.
+    const uniqueReadBook = await ReadLogger.find()
+      .where("user")
+      .equals({ $in: userCollection })
+      .where("doneReading")
+      .equals(true)
+      .select("book createdAt")
+      .sort({ createdAt: "desc" })
+      .distinct("book");
+
+    //읽은책 true && 나이 범위내인것들이 포함된 readlogger docs를 가져옴.
+    // const bookReadCollection = ageReadAllLogger.map(item => item.book);
+
+    //각 책마다 가지고 있는 좋아요 수 종합
+    let countReadCollection = [];
+
+    for (let item of uniqueReadBook) {
+      const countVal = await ReadLogger.count()
+        .where("book")
+        .equals(item)
+        .where("doneReading")
+        .equals(true);
+
+      countReadCollection = [
+        ...countReadCollection,
+        { book: item, readNum: countVal }
+      ];
+    }
+
+    //카운트된 좋아요 내림차순으로 정렬
+    countReadCollection.sort((a, b) => {
+      return a.readNum > b.readNum ? -1 : a.readNum < b.readNum ? 1 : 0;
+    });
+
+    //탑 8개 책 아이디들 -> apteTopLike 배열에 추가
+    for (let i = 0; i < 8; i++) {
+      if (countReadCollection[i] !== undefined)
+        ageTopRead = [...ageTopRead, countReadCollection[i].book];
+    }
+    ///////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////
+    // 종합
+    //해당 유저 나이 범위 탑 좋아요 책아이디들 책 모델에서 조회.
+    const ageTopLikeBook = await Book.find({ _id: { $in: ageTopLikeBook } });
+    const ageTopReadBook = await Book.find({ _id: { $in: ageTopRead } });
 
     // const wishTop;
     // const readTop;
     // const commentTop;
     // const bookTop;
-    res.status(200).json({ success: true, msg: "성공", bookCollection });
+    res
+      .status(200)
+      .json({ success: true, msg: "성공", ageTopLikeBook, ageTopReadBook });
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: true, msg: err });
