@@ -72,9 +72,6 @@ const getCuration = async (req, res) => {
       .sort({ createdAt: "desc" })
       .distinct("book");
 
-    //라이크가 좋아요 && 나이 범위내인것들이 포함된 readlogger docs를 가져옴.
-    // const bookCollection = ageAllLogger.map(item => item.book);
-
     //각 책마다 가지고 있는 좋아요 수 종합
     let countCollection = [];
     for (let item of uniqueBook) {
@@ -120,9 +117,6 @@ const getCuration = async (req, res) => {
       .select("book createdAt")
       .sort({ createdAt: "desc" })
       .distinct("book");
-
-    //읽은책 true && 나이 범위내인것들이 포함된 readlogger docs를 가져옴.
-    // const bookReadCollection = ageReadAllLogger.map(item => item.book);
 
     //각 책마다 가지고 있는 좋아요 수 종합
     let countReadCollection = [];
