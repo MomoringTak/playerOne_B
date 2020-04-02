@@ -42,8 +42,6 @@ const getCuration = async (req, res) => {
 
     //유저 나이 플마 5살 범위 검색
     const ageTop = await User.find()
-      //   .where("id")
-      //   .ne(givenUser_id)
       .where("age")
       .gte(givenUser.age - 5)
       .lte(givenUser.age + 5)
@@ -98,7 +96,7 @@ const getCuration = async (req, res) => {
     /////////////////////////////////////////////////////////////////////////
     let ageTopRead = [];
 
-    //유저들이 가지고있는 리드로거 모델에서 wish가 true인 docs를 찝고 내림차순으로 정렬. limit은 2000개로제한.
+    //유저들이 가지고있는 리드로거 모델에서 doneReading true인 docs를 찝고 내림차순으로 정렬. limit은 2000개로제한.
     const ageReadAllLogger = await ReadLogger.find()
       .where("user")
       .equals({ $in: userCollection })
@@ -118,7 +116,7 @@ const getCuration = async (req, res) => {
       .sort({ createdAt: "desc" })
       .distinct("book");
 
-    //각 책마다 가지고 있는 좋아요 수 종합
+    //각 책마다 가지고 있는 읽은책 수 종합
     let countReadCollection = [];
 
     for (let item of uniqueReadBook) {
@@ -134,31 +132,100 @@ const getCuration = async (req, res) => {
       ];
     }
 
-    //카운트된 좋아요 내림차순으로 정렬
+    //카운트된 읽음 true 내림차순으로 정렬
     countReadCollection.sort((a, b) => {
       return a.readNum > b.readNum ? -1 : a.readNum < b.readNum ? 1 : 0;
     });
 
-    //탑 8개 책 아이디들 -> apteTopLike 배열에 추가
+    //탑 8개 책 아이디들 -> ageTopRead 배열에 추가
     for (let i = 0; i < 8; i++) {
       if (countReadCollection[i] !== undefined)
         ageTopRead = [...ageTopRead, countReadCollection[i].book];
     }
     ///////////////////////////////////////////////////////
+    let wishGroup = [];
+    //같은 책 중복제거 아이디만 가져옴.
+    const uniqueTopWishBook = await ReadLogger.find()
+      .where("wish")
+      .equals(true)
+      .select("book createdAt")
+      .sort({ createdAt: "desc" })
+      .distinct("book");
+
+    let countWish = [];
+
+    for (let item of uniqueTopWishBook) {
+      const countVal = await ReadLogger.count()
+        .where("book")
+        .equals(item)
+        .where("wish")
+        .equals(true);
+
+      countWish = [...countWish, { book: item, wishNum: countVal }];
+    }
+
+    //카운트된 읽음 true 내림차순으로 정렬
+    countWish.sort((a, b) => {
+      return a.wishNum > b.wishNum ? -1 : a.wishNum < b.wishNum ? 1 : 0;
+    });
+
+    //탑 8개 책 아이디들 -> ageTopRead 배열에 추가
+    for (let i = 0; i < 8; i++) {
+      if (countWish[i] !== undefined)
+        wishGroup = [...wishGroup, countWish[i].book];
+    }
+    /////////////////////////////////////////////////////////
+
+    let readGroup = [];
+    //같은 책 중복제거 아이디만 가져옴.
+    const uniqueTopReadBook = await ReadLogger.find()
+      .where("doneReading")
+      .equals(true)
+      .select("book createdAt")
+      .sort({ createdAt: "desc" })
+      .distinct("book");
+
+    let countRead = [];
+
+    for (let item of uniqueTopReadBook) {
+      const countVal = await ReadLogger.count()
+        .where("book")
+        .equals(item)
+        .where("doneReading")
+        .equals(true);
+
+      countRead = [...countRead, { book: item, readNum: countVal }];
+    }
+
+    //카운트된 읽음 true 내림차순으로 정렬
+    countRead.sort((a, b) => {
+      return a.readNum > b.readNum ? -1 : a.readNum < b.readNum ? 1 : 0;
+    });
+
+    //탑 8개 책 아이디들 -> ageTopRead 배열에 추가
+    for (let i = 0; i < 8; i++) {
+      if (countRead[i] !== undefined)
+        readGroup = [...readGroup, countRead[i].book];
+    }
 
     /////////////////////////////////////////////////////////
     // 종합
     //해당 유저 나이 범위 탑 좋아요 책아이디들 책 모델에서 조회.
     const ageTopLikeBook = await Book.find({ _id: { $in: ageTopLikeBook } });
     const ageTopReadBook = await Book.find({ _id: { $in: ageTopRead } });
+    const wishTop = await Book.find({ _id: { $in: wishGroup } });
+    const readTop = await Book.find({ _id: { $in: readGroup } });
 
-    // const wishTop;
-    // const readTop;
     // const commentTop;
     // const bookTop;
-    res
-      .status(200)
-      .json({ success: true, msg: "성공", ageTopLikeBook, ageTopReadBook });
+    res.status(200).json({
+      success: true,
+      msg: "성공",
+      ageTopLikeBook,
+      ageTopReadBook,
+      wishTop,
+      readTop
+    });
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: true, msg: err });
