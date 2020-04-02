@@ -211,20 +211,29 @@ const getCuration = async (req, res) => {
     /////////////////////////////////////////////////////////
     // 종합
     //해당 유저 나이 범위 탑 좋아요 책아이디들 책 모델에서 조회.
-    const ageTopLikeBook = await Book.find({ _id: { $in: ageTopLikeBook } });
+    const ageTopLikeBook = await Book.find({ _id: { $in: ageTopLike } });
     const ageTopReadBook = await Book.find({ _id: { $in: ageTopRead } });
     const wishTop = await Book.find({ _id: { $in: wishGroup } });
     const readTop = await Book.find({ _id: { $in: readGroup } });
 
     // const commentTop;
     // const bookTop;
+
+    //   res.status(200).json({
+    //   success: true,
+    //   msg: "성공",
+    //   ageTopLikeBook,
+    //   ageTopReadBook,
+    //   wishTop,
+    //   readTop
+    // });
     res.status(200).json({
       success: true,
       msg: "성공",
-      ageTopLikeBook,
-      ageTopReadBook,
-      wishTop,
-      readTop
+      ageTopLike,
+      ageTopRead,
+      wishGroup,
+      readGroup
     });
   } catch (err) {
     console.log(err);
