@@ -45,6 +45,8 @@ const GET_USER_MY_PAGE = "/getUserMyPage/:id";
 //Book
 const BOOK = "/books";
 
+const GET_CURATION = "/getCuration";
+
 //getBook
 //OpenAPI 통한 책 검색 API : 클라이언트에서 키워드를 받아 큐레이션.
 const GET_BOOK = "/:title/:display";
@@ -142,6 +144,7 @@ const routes = {
   getReadLogger: GET_READLOGGER,
   getUserMyPage: GET_USER_MY_PAGE,
   books: BOOK,
+  getCuration: GET_CURATION,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,
   uploadBook: UPLOAD_BOOK,

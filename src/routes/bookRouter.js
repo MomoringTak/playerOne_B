@@ -8,7 +8,8 @@ import {
   uploadBook,
   commentBook,
   getBookDetail,
-  addToBooklist
+  addToBooklist,
+  getCuration
 } from "../controllers/bookController";
 import { getBookWish } from "../controllers/readLoggerController";
 
@@ -37,5 +38,7 @@ bookRouter.post(routes.commentBook, commentBook);
 bookRouter.post(routes.addToBooklist, addToBooklist);
 
 bookRouter.get(routes.bookWish, getBookWish);
+
+bookRouter.get(routes.getCuration, getCuration);
 
 export default bookRouter;
