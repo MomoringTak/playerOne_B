@@ -15,6 +15,8 @@ import { getBookWish } from "../controllers/readLoggerController";
 
 const bookRouter = express.Router();
 
+bookRouter.get(routes.getCuration, getCuration);
+
 //getBook
 //OpenAPI 통한 책 검색 API : 클라이언트에서 키워드를 받아 큐레이션.
 bookRouter.get(routes.getBook, getBook);
@@ -38,7 +40,5 @@ bookRouter.post(routes.commentBook, commentBook);
 bookRouter.post(routes.addToBooklist, addToBooklist);
 
 bookRouter.get(routes.bookWish, getBookWish);
-
-bookRouter.get(routes.getCuration, getCuration);
 
 export default bookRouter;

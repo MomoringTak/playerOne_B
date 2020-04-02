@@ -30,7 +30,15 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "BookList"
     }
-  ]
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 UserSchema.plugin(findOrCreate);

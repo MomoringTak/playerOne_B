@@ -1,4 +1,6 @@
-import User from "../../models";
+import User from "../../models/User";
+import db from "../../db/db";
+import ReadLogger from "../../models/ReadLogger";
 
 const createSeedData = async (req, res) => {
   const dummyUser = [
@@ -22,9 +24,39 @@ const createSeedData = async (req, res) => {
     { nickname: "dummy18", age: "39", gender: "male" },
     { nickname: "dummy19", age: "40", gender: "female" }
   ];
+
+  const dummyReadLooger = [
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: false },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: true },
+    { wish: true, read: true }
+  ];
   try {
-    User.create(dummyUser);
+    db.collection("users").remove({});
+    db.collection("readloggers").remove({});
+    const user = await User.create(dummyUser);
+
+    user.map((item, index) => (dummyReadLooger[index].user = item._id));
+
+    const logger = await ReadLogger.create(dummyReadLooger);
+    res.status(200).json({ success: true, msg: "시드 데이터 생성 성공", user });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ success: false, msg: err });
   }
 };
