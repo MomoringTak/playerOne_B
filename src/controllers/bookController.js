@@ -6,3 +6,4 @@ export { default as commentBook } from "./book/commentBook";
 export { default as addToBooklist } from "./book/addToBooklist";
 export { default as getCuration } from "./book/getCuration";
 export { default as getRecentBook } from "./book/getRecentBook";
+export { default as getAgeRecommendation } from "./book/getAgeRecommendation";

@@ -10,7 +10,8 @@ import {
   getBookDetail,
   addToBooklist,
   getCuration,
-  getRecentBook
+  getRecentBook,
+  getAgeRecommendation
 } from "../controllers/bookController";
 import { getBookWish } from "../controllers/readLoggerController";
 
@@ -20,6 +21,7 @@ bookRouter.get(routes.getCuration, getCuration);
 
 bookRouter.get(routes.getRecentBook, getRecentBook);
 
+bookRouter.get(routes.getAgeRecommendation, getAgeRecommendation);
 //getBook
 //OpenAPI 통한 책 검색 API : 클라이언트에서 키워드를 받아 큐레이션.
 bookRouter.get(routes.getBook, getBook);

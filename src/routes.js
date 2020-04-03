@@ -47,6 +47,8 @@ const BOOK = "/books";
 
 const GET_CURATION = "/getCuration";
 
+const GET_AGE_RECOMMENDATION = "/getAgeRecommendation/:id";
+
 const GET_RECENT_BOOK = "/getRecentBook";
 
 //getBook
@@ -147,6 +149,7 @@ const routes = {
   getUserMyPage: GET_USER_MY_PAGE,
   books: BOOK,
   getCuration: GET_CURATION,
+  getAgeRecommendation: GET_AGE_RECOMMENDATION,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,
   getRecentBook: GET_RECENT_BOOK,
