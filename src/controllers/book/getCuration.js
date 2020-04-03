@@ -2,7 +2,7 @@ import User from "../../models/User";
 import Comment from "../../models/Comment";
 import ReadLogger from "../../models/ReadLogger";
 import BookList from "../../models/BookList";
-import Book from "../../models/BookList";
+import Book from "../../models/Book";
 
 const getCuration = async (req, res) => {
   const { body: userId } = req;
@@ -28,6 +28,8 @@ const getCuration = async (req, res) => {
 4. 댓글이 제일많은 탑 8
 - 최근 1주일 한으로 데이터 필터링 
 - Comment 모델에서 중복되있는 북아이디 탑 8
+- Comment.find().sort({createdAt : desc})
+- 
 
 
 5. 북리스트에 공통적으로 자주 등록되는 탑 8
@@ -37,7 +39,7 @@ const getCuration = async (req, res) => {
     */
   try {
     let ageTopLike = [];
-    const id = "5e862397d700d23844efda79";
+    const id = "5e86cdf3e13048291448ce35";
     const givenUser = await User.findById(id);
 
     //유저 나이 플마 5살 범위 검색
@@ -142,7 +144,9 @@ const getCuration = async (req, res) => {
       if (countReadCollection[i] !== undefined)
         ageTopRead = [...ageTopRead, countReadCollection[i].book];
     }
-    ///////////////////////////////////////////////////////
+
+    //-----------------------------------------------------//
+
     let wishGroup = [];
     //같은 책 중복제거 아이디만 가져옴.
     const uniqueTopWishBook = await ReadLogger.find()
@@ -174,10 +178,10 @@ const getCuration = async (req, res) => {
       if (countWish[i] !== undefined)
         wishGroup = [...wishGroup, countWish[i].book];
     }
-    /////////////////////////////////////////////////////////
+    //-----------------------------------------------------//
 
     let readGroup = [];
-    //같은 책 중복제거 아이디만 가져옴.
+    //읽음으로 표시된 책들의 Distinct(중복제거) ID만 가져옴.
     const uniqueTopReadBook = await ReadLogger.find()
       .where("doneReading")
       .equals(true)
@@ -207,19 +211,48 @@ const getCuration = async (req, res) => {
       if (countRead[i] !== undefined)
         readGroup = [...readGroup, countRead[i].book];
     }
+    //-----------------------------------------------------//
+    let commentGroup = [];
 
-    /////////////////////////////////////////////////////////
+    const uniqueComment = await Comment.find()
+      .sort({ createdAt: "desc" })
+      .distinct("book");
+
+    let countComment = [];
+
+    for (let item of uniqueComment) {
+      const countVal = await Comment.count()
+        .where("book")
+        .equals(item);
+
+      countComment = [...countComment, { book: item, commentNum: countVal }];
+    }
+
+    countComment.sort((a, b) => {
+      return a.commentNum > b.commentNum
+        ? -1
+        : a.commentNum < b.commentNum
+        ? 1
+        : 0;
+    });
+
+    for (let i = 0; i < 8; i++) {
+      if (countComment[i] !== undefined)
+        commentGroup = [...commentGroup, countComment[i].book];
+    }
+
+    //-----------------------------------------------------//
     // 종합
     //해당 유저 나이 범위 탑 좋아요 책아이디들 책 모델에서 조회.
-    const ageTopLikeBook = await Book.find({ _id: { $in: ageTopLike } });
-    const ageTopReadBook = await Book.find({ _id: { $in: ageTopRead } });
-    const wishTop = await Book.find({ _id: { $in: wishGroup } });
-    const readTop = await Book.find({ _id: { $in: readGroup } });
+    const ageTopLikeBook = await Book.find({ _id: ageTopLike });
+    const ageTopReadBook = await Book.find({ _id: ageTopRead });
+    const wishTop = await Book.find({ _id: wishGroup });
+    const readTop = await Book.find({ _id: readGroup });
+    const commentTop = await Book.find({ _id: commentGroup });
 
-    // const commentTop;
     // const bookTop;
 
-    //   res.status(200).json({
+    // res.status(200).json({
     //   success: true,
     //   msg: "성공",
     //   ageTopLikeBook,
@@ -227,13 +260,11 @@ const getCuration = async (req, res) => {
     //   wishTop,
     //   readTop
     // });
+
     res.status(200).json({
       success: true,
       msg: "성공",
-      ageTopLike,
-      ageTopRead,
-      wishGroup,
-      readGroup
+      commentTop
     });
   } catch (err) {
     console.log(err);
