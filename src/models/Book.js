@@ -68,11 +68,11 @@ const BookSchema = new Schema({
   ],
   createdAt: {
     type: Date,
-    defaut: Date.now
+    default: Date.now
   },
   updatedAt: {
     type: Date,
-    defaut: Date.now
+    default: Date.now
   }
 });
 
