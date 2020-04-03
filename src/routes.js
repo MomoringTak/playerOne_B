@@ -47,6 +47,8 @@ const BOOK = "/books";
 
 const GET_CURATION = "/getCuration";
 
+const GET_RECENT_BOOK = "/getRecentBook";
+
 //getBook
 //OpenAPI 통한 책 검색 API : 클라이언트에서 키워드를 받아 큐레이션.
 const GET_BOOK = "/:title/:display";
@@ -147,6 +149,7 @@ const routes = {
   getCuration: GET_CURATION,
   getBook: GET_BOOK,
   getAllBook: GET_ALLBOOK,
+  getRecentBook: GET_RECENT_BOOK,
   uploadBook: UPLOAD_BOOK,
   addToBooklist: ADD_BOOK_TO_BOOKLIST,
   getBookDetail: GET_BOOK_DETAIL,

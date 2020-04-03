@@ -9,13 +9,16 @@ import {
   commentBook,
   getBookDetail,
   addToBooklist,
-  getCuration
+  getCuration,
+  getRecentBook
 } from "../controllers/bookController";
 import { getBookWish } from "../controllers/readLoggerController";
 
 const bookRouter = express.Router();
 
 bookRouter.get(routes.getCuration, getCuration);
+
+bookRouter.get(routes.getRecentBook, getRecentBook);
 
 //getBook
 //OpenAPI 통한 책 검색 API : 클라이언트에서 키워드를 받아 큐레이션.
