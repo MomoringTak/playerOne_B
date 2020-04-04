@@ -3,6 +3,7 @@ import BookList from "../../models/BookList";
 const getAllBooklist = async (req, res) => {
   try {
     const BooklistResult = await BookList.find()
+      .sort({ createdAt: "desc" })
       .populate({
         path: "userId",
         model: "User"
