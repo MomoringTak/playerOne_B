@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const UNDEFINED = "undefined";
+const UNDEFINED = "미분류";
 
 //네이버 검색 API
 const api = axios.create({
