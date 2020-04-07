@@ -16,6 +16,8 @@ import commentRouter from "./routes/commentRouter";
 import searchRouter from "./routes/searchRouter";
 import createSeedData from "./controllers/admin/createSeedData";
 
+import router from "./routes/router.conf";
+
 const app = express();
 
 app.use(logger("dev"));
@@ -24,16 +26,20 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(routes.home, globalRouter);
-app.use(routes.users, userRouter);
-app.use(routes.books, bookRouter);
-app.use(routes.booklists, booklistRouter);
-app.use(routes.comments, commentRouter);
-app.use(routes.searchRoot, searchRouter);
-app.use("/admin/createSeed", createSeedData);
+app.use(router);
+
+// app.use(routes.home, globalRouter);
+// app.use(routes.users, userRouter);
+// app.use(routes.books, bookRouter);
+// app.use(routes.booklists, booklistRouter);
+// app.use(routes.comments, commentRouter);
+// app.use(routes.searchRoot, searchRouter);
+
+//create Seed Data
+// app.use("/admin/createSeed", createSeedData);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log("404 error");
   var err = new Error("Not Found");
   err.status = 404;
@@ -43,7 +49,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get("env") === "development") {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     console.log("500 error");
     res.status(err.status || 500);
     res.send({ message: err.message, error: err });
@@ -51,7 +57,7 @@ if (app.get("env") === "development") {
 } else {
   // production error handler
   // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     console.log("500 error");
     res.status(err.status || 500);
     res.send({ message: err.message, error: {} });
